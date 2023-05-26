@@ -1,3 +1,17 @@
+import siteConfig from "site.config"
+
+export function truncate(value: string, length: number, suffix = "...") {
+  if (value.length < length) {
+    return value
+  }
+
+  return value.slice(0, length) + suffix
+}
+
+export function absoluteURL(uri: string) {
+  return `${siteConfig.drupalBaseUrl}${uri}`
+}
+
 export function formatDate(input: string): string {
   const date = new Date(input)
   return date.toLocaleDateString("en-US", {
@@ -7,6 +21,6 @@ export function formatDate(input: string): string {
   })
 }
 
-export function absoluteUrl(input: string) {
-  return `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}${input}`
+export function isRelative(url: string) {
+  return !new RegExp("^(?:[a-z]+:)?//", "i").test(url)
 }
