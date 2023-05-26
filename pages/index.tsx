@@ -20,7 +20,7 @@ export default function IndexPage({
 }: IndexPageProps) {
   return (
     <Layout meta={{ title: "home" }} menus={menus}>
-      <div className="container grid gap-8 py-8">
+      <div className="container p-10">
         <h2 className="mb-10 text-6xl font-black">Latest Articles.</h2>
         {nodes?.length ? (
           nodes.map((node) => (
@@ -36,6 +36,7 @@ export default function IndexPage({
     </Layout>
   )
 }
+
 
 export async function getStaticProps(
   context: GetStaticPropsContext

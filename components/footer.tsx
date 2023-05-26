@@ -1,4 +1,3 @@
-import Link from "next/link"
 import {DrupalMenuLinkContent} from "next-drupal"
 
 import { MenuFooter } from "components/menu-footer"
