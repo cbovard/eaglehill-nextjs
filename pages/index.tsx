@@ -12,12 +12,11 @@ interface IndexPageProps extends LayoutProps {
   nodes: DrupalNode[]
 }
 
-//console.log(GetStaticPropsContext);
-
 export default function IndexPage({
   menus,
   nodes
 }: IndexPageProps) {
+
   return (
     <Layout meta={{ title: "home" }} menus={menus}>
       <div className="container p-10">
@@ -36,7 +35,6 @@ export default function IndexPage({
     </Layout>
   )
 }
-
 
 export async function getStaticProps(
   context: GetStaticPropsContext

@@ -19,7 +19,10 @@ export async function getGlobalElements(
 
   // Fetch menu items.
   const mainMenu = await drupal.getMenu("main", menuOpts)
+  const quickLinksMenu = await drupal.getMenu("header-quick-links", menuOpts)
   const footerMenu = await drupal.getMenu("footer", menuOpts)
+
+  // console.log(mainMenu);
 
   // Fetch recipes collections view.
   // const { results: recipeCollections } = await drupal.getView<
@@ -58,6 +61,7 @@ export async function getGlobalElements(
   return {
     menus: {
       main: mainMenu.items,
+      quickLinks: quickLinksMenu.items,
       footer: footerMenu.items,
     },
     // blocks: {

@@ -4,12 +4,14 @@ import { DrupalMenuLinkContent } from "next-drupal"
 import classNames from "classnames"
 
 import siteConfig from "site.config"
-import { Logo } from "components/logo"
+// import { Logo } from "components/logo"
 import { MenuMain } from "components/menu-main"
+import { MenuQuickLinks } from "components/menu-quick-links"
 
 export interface HeaderProps {
   menus: {
-    main: DrupalMenuLinkContent[]
+    main: DrupalMenuLinkContent[],
+    quickLinks: DrupalMenuLinkContent[]
   }
 }
 
@@ -25,15 +27,14 @@ export function Header({ menus }: HeaderProps) {
           <div className="flex justify-center">
           </div>
           <div className="flex justify-end">
+            <MenuQuickLinks items={menus.quickLinks} />
           </div>
         </div>
       </div>
       <div className="container relative flex-wrap items-center justify-between py-6 md:flex lg:py-10">
         <Link href="/" passHref className="flex justify-start">
-
-          <Logo className="w-48 h-12 text-primary lg:h-16 lg:w-52" />
+          {siteConfig.name}
           <span className="sr-only">{siteConfig.name}</span>
-
         </Link>
         <button
           className="absolute transition-all border beorder-transparent md:hidden right-4 top-8 hover:border-link"

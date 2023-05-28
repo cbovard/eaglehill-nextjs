@@ -16,7 +16,7 @@ export function Layout({ meta, menus, children }: LayoutProps) {
       <Meta {...meta} />
       <div className="flex flex-col min-h-screen">
         <PreviewAlert />
-        <Header menus={{ main: menus.main }} />
+        <Header menus={{ main: menus.main, quickLinks: menus.quickLinks }} />
         <main className="flex-1 pb-10 bg-body">{children}</main>
         <Footer menus={{ footer: menus.footer }} />
       </div>
