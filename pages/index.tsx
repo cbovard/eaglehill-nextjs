@@ -6,19 +6,24 @@ import { drupal } from "lib/drupal"
 import { getGlobalElements } from "lib/get-global-elements"
 
 import { Layout, LayoutProps } from "components/layout"
+import { NodePage } from "components/node--page"
 import { NodeArticleTeaser } from "components/node--article--teaser"
 
 interface IndexPageProps extends LayoutProps {
-  nodes: DrupalNode[]
+  nodes: DrupalNode[],
+  node: DrupalNode
 }
 
 export default function IndexPage({
   menus,
-  nodes
+  nodes,
+  node
 }: IndexPageProps) {
-
   return (
     <Layout meta={{ title: "home" }} menus={menus}>
+      <div className="container p-10">
+        <NodePage node={node as DrupalNode} />
+      </div>
       <div className="container p-10">
         <h2 className="mb-10 text-6xl font-black">Latest Articles.</h2>
         {nodes?.length ? (
@@ -39,6 +44,7 @@ export default function IndexPage({
 export async function getStaticProps(
   context: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<IndexPageProps>> {
+
   const nodes = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--article",
     context,
@@ -52,10 +58,18 @@ export async function getStaticProps(
     }
   )
 
+  // Get the Homepage by UUID.
+  // /jsonapi/node/page/482e1cc3-d016-47d8-a164-53d7fb0b6b7e
+  const node = await drupal.getResource<DrupalNode>(
+    "node--page",
+    "482e1cc3-d016-47d8-a164-53d7fb0b6b7e"
+  )
+
   return {
     props: {
       ...(await getGlobalElements(context)),
       nodes,
+      node,
     },
   }
 }
