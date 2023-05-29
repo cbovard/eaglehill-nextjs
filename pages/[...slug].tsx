@@ -21,6 +21,8 @@ export default function ResourcePage({
 }: ResourcePageProps) {
   if (!resource) return null
 
+  //console.log(resource);
+
   return (
     <Layout
       menus={menus}
@@ -52,6 +54,7 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<ResourcePageProps>> {
   const path = await drupal.translatePathFromContext(context)
 
+
   // If path is not found or the resource is not one we care about,
   // return a 404.
   if (!path || !RESOURCE_TYPES.includes(path.jsonapi.resourceName)) {
@@ -59,6 +62,8 @@ export async function getStaticProps(
       notFound: true,
     }
   }
+
+  //console.log(path.jsonapi.resourceName, 'path');
 
   // Fetch the resource from Drupal.
   const resource = await drupal.getResourceFromContext<DrupalNode>(

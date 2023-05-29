@@ -9,10 +9,24 @@ export function getParams(
 
   name = mode ? `${name}--${mode}` : name
 
+  // console.log(name, 'name');
+
+  if (name === "node--home-page") {
+    return params
+      .addFilter("status", "1")
+      .addInclude(["field_page_images.field_media_image"])
+      .addFields("node--page", ["title", "body", "status", "field_page_images"])
+      .addFields("media--image", ["field_media_image"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta"])
+  }
+
   if (name === "node--page") {
     return params
       .addFilter("status", "1")
-      .addFields("node--page", ["title", "body", "status"])
+      .addInclude(["field_page_images.field_media_image"])
+      .addFields("node--page", ["title", "body", "status", "field_page_images"])
+      .addFields("media--image", ["field_media_image"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta"])
   }
 
   if (name === "node--article--card") {
@@ -128,11 +142,4 @@ export function getParams(
     ])
   }
 
-  if (name === "taxonomy_term--tags") {
-    return params.addFields("taxonomy_term--tags", ["name", "path"])
-  }
-
-  if (name === "taxonomy_term--recipe_category") {
-    return params.addFields("taxonomy_term--recipe_category", ["name", "path"])
-  }
 }
