@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { DrupalNode } from "next-drupal"
 
-// import { Breadcrumbs } from "components/breadcrumbs"
+import { Breadcrumbs } from "components/breadcrumbs"
 import { FormattedText } from "./formatted-text"
 import { absoluteURL } from "lib/utils"
 import { MediaImages } from "components/media--images"
@@ -11,18 +11,15 @@ interface NodePageProps {
 }
 
 export function NodePage({ node }: NodePageProps) {
-
-  //console.log(node, "homepage node--page");
-
   return (
     <div className="container">
-      {/* <Breadcrumbs
+      <Breadcrumbs
         items={[
           {
             title: node.title,
           },
         ]}
-      /> */}
+      />
       <article className="bg-white border text-text p-9 border-border">
         <h1 className="font-serif text-2xl leading-tight lg:text-4xl">
           {node.title}
@@ -31,7 +28,7 @@ export function NodePage({ node }: NodePageProps) {
           {node.body?.processed && <FormattedText text={node.body.processed} />}
         </div>
         <div>
-          <MediaImages media={node.field_page_images} width={164} height={111} />
+          <MediaImages media={node.field_page_images} teaser={false} />
         </div>
       </article>
     </div>

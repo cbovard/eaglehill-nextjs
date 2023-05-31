@@ -1,4 +1,6 @@
 // https://nextjs.org/docs/pages/building-your-application/optimizing/images
+// https://nextjs.org/docs/pages/api-reference/components/image
+// todo fix this
 import Image, { ImageProps } from "next/image"
 
 import { absoluteURL } from "lib/utils"
@@ -8,47 +10,51 @@ interface MediaImageProps extends MediaProps, Partial<ImageProps> {}
 
 export function MediaImages({
   media,
-  layout = "responsive",
-  objectFit,
-  width,
-  height,
-  priority,
+  teaser,
   ...props
 }: MediaImageProps) {
   const images = media;
 
-  console.log(images[0].field_media_image.uri);
+  //console.log(teaser);
 
   // If there are no images.
   if (!images[0].field_media_image?.uri) {
     return null
   }
 
-  console.log(images);
-
-  const sizeProps =
-    layout === "fill"
-      ? null
-      : {
-          width: width,
-          height: height,
-        }
-
-  return (
-    <div>
-    {images.map((image) => (
-      <div key={image.id} className="media__content image__wrapper" {...props}>
-        <Image
-          src={absoluteURL(image.field_media_image.uri.url)}
-          layout={layout}
-          objectFit={objectFit}
-          alt={image.field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
-          title={image.resourceIdObjMeta.title}
-          priority={priority}
-          {...sizeProps}
-        />
+  // todo - need to move below to a component and get image styles.
+  // If there is only one teaser image
+  if (teaser) {
+    return (
+      <div>
+        <div className="media__content image__wrapper" {...props}>
+          <Image
+            src={absoluteURL(images[0].field_media_image.uri.url)}
+            alt={images[0].field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
+            width={500}
+            height={500}
+          />
+        </div>
       </div>
-    ))}
-    </div>
-  )
+    )
+  } else {
+    // Get all the images.
+    return (
+      <div>
+      {images.map((image) => (
+        <div key={image.id} className="media__content image__wrapper" {...props}>
+          <Image
+            src={absoluteURL(image.field_media_image.uri.url)}
+            alt={image.field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
+            width={500}
+            height={500}
+          />
+        </div>
+      ))}
+      </div>
+    )
+  }
+
+
+
 }

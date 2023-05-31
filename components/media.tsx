@@ -7,10 +7,11 @@ const mediaTypes = {
 }
 
 export interface MediaProps {
-  media: DrupalMedia
+  media: DrupalMedia,
+  teaser: boolean
 }
 
-export function Media({ media, ...props }: MediaProps) {
+export function Media({ media, teaser, ...props }: MediaProps) {
   const Component = mediaTypes[media?.type]
 
   if (!media || !Component) {

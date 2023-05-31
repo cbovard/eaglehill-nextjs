@@ -7,17 +7,18 @@ import { getParams } from "lib/get-params"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { Layout, LayoutProps } from "components/layout"
 import { PageHeader } from "components/page-header"
+import { NodeLivestockTeaser } from "components/node--livestock--teaser"
 
 interface StallionsPageProps extends LayoutProps {
-  view: any,
+  livestockView: any,
 }
 
 export default function StallionsPage({
   menus,
-  view,
+  livestockView,
 }: StallionsPageProps) {
 
-  console.log(view, 'livestock 3');
+  //console.log(livestockView.results, 'livestock 3');
 
   return (
     <Layout
@@ -36,7 +37,12 @@ export default function StallionsPage({
       />
       <div className="container">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          Stallions Content
+          {livestockView.results.map((livestock) => (
+            <NodeLivestockTeaser key={livestock.id} node={livestock} />
+          ))}
+          {/* {recipes.map((recipe) => (
+            <NodeRecipeTeaser key={recipe.id} node={recipe} />
+          ))} */}
         </div>
       </div>
     </Layout>
@@ -47,6 +53,7 @@ export async function getStaticProps(
   context: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<StallionsPageProps>> {
 
+  // todo need to move this more to a global.
   // /jsonapi/views/livestock/page_stallions?fields%5Bnode--livestock%5D=title%2Cbody%2Cpath%2Cfield_livestock_images&fields%5Bmedia--image%5D=field_media_image&fields%5Bfile--file%5D=uri%2CresourceIdObjMeta&include=field_livestock_images.field_media_image
   const params = new DrupalJsonApiParams()
   .addInclude(["field_livestock_images.field_media_image"])
@@ -54,14 +61,14 @@ export async function getStaticProps(
   .addFields("media--image", ["field_media_image"])
   .addFields("file--file", ["uri", "resourceIdObjMeta"])
 
-  const view = await drupal.getView("livestock--page_stallions", {
+  const livestockView = await drupal.getView("livestock--page_stallions", {
     params: params.getQueryObject(),
   })
 
   return {
     props: {
       ...(await getGlobalElements(context)),
-      view,
+      livestockView,
     },
   }
 }

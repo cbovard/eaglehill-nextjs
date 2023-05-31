@@ -29,8 +29,6 @@ const options: HTMLReactParserOptions = {
                 width={100}
                 height={100}
                 alt={alt}
-                layout="intrinsic"
-                objectFit="cover"
               />
             </div>
           )
@@ -61,3 +59,15 @@ export function FormattedText({ text }: FormattedTextProps) {
 
   return <>{parse(text, options)}</>
 }
+
+// Todo - This needs some serious work.
+export function TeaserText({ text }: FormattedTextProps) {
+  if (!text) return null
+
+  const strippedString = text.replace(/(<([^>]+)>)/gi, "");
+  const strippedTruncatedString = strippedString.substring(0, 200) + '...';
+
+  return <>{strippedTruncatedString}</>
+}
+
+
