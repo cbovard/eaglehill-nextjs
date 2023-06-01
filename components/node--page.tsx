@@ -11,6 +11,7 @@ interface NodePageProps {
 }
 
 export function NodePage({ node }: NodePageProps) {
+
   return (
     <div className="container">
       <Breadcrumbs
@@ -27,9 +28,11 @@ export function NodePage({ node }: NodePageProps) {
         <div className="mt-4 prose prose-a:text-link max-w-none text-text">
           {node.body?.processed && <FormattedText text={node.body.processed} />}
         </div>
-        <div>
-          <MediaImages media={node.field_page_images} teaser={false} />
-        </div>
+        {node.field_page_images?.length ? (
+          <div>
+            <MediaImages media={node.field_page_images} teaser={false} />
+          </div>
+        ) : null}
       </article>
     </div>
   )

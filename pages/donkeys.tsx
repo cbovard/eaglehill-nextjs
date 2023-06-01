@@ -9,31 +9,36 @@ import { Layout, LayoutProps } from "components/layout"
 import { PageHeader } from "components/page-header"
 import { NodeLivestockTeaser } from "components/node--livestock--teaser"
 
-interface StallionsPageProps extends LayoutProps {
+interface DonkeysPageProps extends LayoutProps {
   livestockView: any,
 }
 
-export default function StallionsPage({
+export default function DonkeysPage({
   menus,
   livestockView,
-}: StallionsPageProps) {
+}: DonkeysPageProps) {
+
+  console.log(livestockView);
 
   return (
     <Layout
       menus={menus}
       meta={{
-        title: "Stallions",
+        title: "Our Donkeys",
       }}
     >
       <PageHeader
-        heading="Stallions"
+        heading="Our Donkeys"
         breadcrumbs={[
           {
-            title: "Stallions",
+            title: "Our Donkeys",
           },
         ]}
       />
       <div className="container">
+        <div>
+          <p>Our Small Standard Donkeys are wonderful pets, guard animals, or companion animals.  Give us a call and we will talk on the fantastic personalities of donkeys.</p>
+        </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {livestockView.results.map((livestock: DrupalNode) => (
             <NodeLivestockTeaser key={livestock.id} node={livestock} />
@@ -46,17 +51,17 @@ export default function StallionsPage({
 
 export async function getStaticProps(
   context: GetStaticPropsContext
-): Promise<GetStaticPropsResult<StallionsPageProps>> {
+): Promise<GetStaticPropsResult<DonkeysPageProps>> {
 
   // todo need to move this more to a global.
-  // /jsonapi/views/livestock/page_stallions?fields%5Bnode--livestock%5D=title%2Cbody%2Cpath%2Cfield_livestock_images&fields%5Bmedia--image%5D=field_media_image&fields%5Bfile--file%5D=uri%2CresourceIdObjMeta&include=field_livestock_images.field_media_image
+  // /jsonapi/views/livestock/page_donkeys?fields%5Bnode--livestock%5D=title%2Cbody%2Cpath%2Cfield_livestock_images&fields%5Bmedia--image%5D=field_media_image&fields%5Bfile--file%5D=uri%2CresourceIdObjMeta&include=field_livestock_images.field_media_image
   const params = new DrupalJsonApiParams()
   .addInclude(["field_livestock_images.field_media_image"])
   .addFields("node--livestock", ["title", "body", "path", "field_livestock_images"])
   .addFields("media--image", ["field_media_image"])
   .addFields("file--file", ["uri", "resourceIdObjMeta"])
 
-  const livestockView = await drupal.getView("livestock--page_stallions", {
+  const livestockView = await drupal.getView("livestock--page_donkeys", {
     params: params.getQueryObject(),
   })
 
