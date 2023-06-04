@@ -40,7 +40,7 @@ export default async function handler(
 
       // Format the payload for /webform_rest/submit
       const payload = {
-        webform_id: "contact",
+        webform_id: "contact_main_form",
         name: body.name,
         email: body.email,
         subject: body.subject,

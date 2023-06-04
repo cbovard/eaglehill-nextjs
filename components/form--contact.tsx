@@ -1,5 +1,6 @@
 import * as React from "react"
 import classNames from "classnames"
+import { useRouter } from 'next/navigation';
 
 interface FormContactProps extends React.HTMLProps<HTMLFormElement> {}
 
@@ -8,24 +9,25 @@ interface FormStatus {
   message?: string
 }
 
-// interface UserFormState {
-//   name: string;
-//   email: string;
-//   subject: string;
-//   message: string;
-// }
-
 export function FormContact({ className, ...props }: FormContactProps) {
   const [formStatus, setFormStatus] = React.useState<FormStatus>(null)
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [secondEmail, setEmail2] = React.useState('');
   const [subject, setSubject] = React.useState('');
   const [message, setMessage] = React.useState('');
+
+  const router = useRouter();
 
   const onSubmit = async (event) => {
     event.preventDefault()
 
     const data = new FormData(event.target)
+
+    if (data.get('secondEmail') !== "") {
+      // Form submission is spam redirect to the homepage to mess the bot up.
+      router.push('/')
+    }
 
     setFormStatus({ status: "fetching" })
 
@@ -45,6 +47,7 @@ export function FormContact({ className, ...props }: FormContactProps) {
     // Clear form.
     setName('');
     setEmail('');
+    setEmail2('');
     setSubject('');
     setMessage('');
 
@@ -99,6 +102,21 @@ export function FormContact({ className, ...props }: FormContactProps) {
           onChange={event => setEmail(event.target.value)}
           maxLength={255}
           required
+          className="px-2 py-3 border-2 border-gray focus:outline-dotted focus:outline-offset-2 focus:outline-link focus:ring-0 focus:border-gray"
+        />
+      </div>
+      <div className="hidden">
+        <label htmlFor="secondEmail" className="font-semibold text-text">
+          {"Re-enter Email Address"}
+          <span className="text-sm text-red-500">*</span>
+        </label>
+        <input
+          type="email"
+          id="secondEmail"
+          name="secondEmail"
+          value={secondEmail}
+          onChange={event => setEmail2(event.target.value)}
+          maxLength={255}
           className="px-2 py-3 border-2 border-gray focus:outline-dotted focus:outline-offset-2 focus:outline-link focus:ring-0 focus:border-gray"
         />
       </div>
