@@ -9,8 +9,6 @@ interface NodeLivestockTeaserProps {
 
 export function NodeLivestockTeaser({ node, ...props }: NodeLivestockTeaserProps) {
 
-  //console.log(node);
-
   return (
     <article
       className="relative flex flex-col p-4 space-y-4 overflow-hidden bg-white border border-border group"

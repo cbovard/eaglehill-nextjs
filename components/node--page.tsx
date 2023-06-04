@@ -12,15 +12,19 @@ interface NodePageProps {
 
 export function NodePage({ node }: NodePageProps) {
 
+  const isFront = (node.id == '482e1cc3-d016-47d8-a164-53d7fb0b6b7e') ? 'isFront' : 'notFront';
+
   return (
     <div className="container">
-      <Breadcrumbs
-        items={[
-          {
-            title: node.title,
-          },
-        ]}
-      />
+      {isFront == "notFront" && (
+        <Breadcrumbs
+          items={[
+            {
+              title: node.title,
+            },
+          ]}
+        />
+      )}
       <article className="bg-white border text-text p-9 border-border">
         <h1 className="font-serif text-2xl leading-tight lg:text-4xl">
           {node.title}

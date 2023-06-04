@@ -54,7 +54,4 @@ export function MediaImages({
       </div>
     )
   }
-
-
-
 }
