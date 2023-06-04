@@ -12,28 +12,6 @@ export default async function handler(
     }
 
     if (req.method === "POST") {
-      //const url = drupal.buildUrl("/webform_rest/submit")
-
-
-      //console.log(JSON.stringify(request.body.name), 'body shit');
-
-      //console.log(url, 'post URL');
-
-      // // Submit to Drupal.
-      // const result = await drupal.fetch(url.toString(), {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     webform_id: "contact",
-      //     name: request.body.name,
-      //     email: request.body.email,
-      //     subject: request.body.subject,
-      //     message: request.body.message,
-      //   }),
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // })
-
       // The body field will contain the form values.
       // You can make a request to your site with these values.
       const body = JSON.parse(req.body)
