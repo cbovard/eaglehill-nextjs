@@ -11,14 +11,14 @@ export function getParams(
 
   // console.log(name, 'name');
 
-  if (name === "node--home-page") {
-    return params
-      .addFilter("status", "1")
-      .addInclude(["field_page_images.field_media_image"])
-      .addFields("node--page", ["title", "body", "status", "field_page_images"])
-      .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
-  }
+  // if (name === "node--home-page") {
+  //   return params
+  //     .addFilter("status", "1")
+  //     .addInclude(["field_page_images.field_media_image"])
+  //     .addFields("node--page", ["title", "body", "status", "field_page_images"])
+  //     .addFields("media--image", ["field_media_image"])
+  //     .addFields("file--file", ["uri", "resourceIdObjMeta"])
+  // }
 
   if (name === "node--page") {
     return params
@@ -29,79 +29,38 @@ export function getParams(
       .addFields("file--file", ["uri", "resourceIdObjMeta"])
   }
 
-  if (name === "node--article--card") {
+  if (name === "node--news--teaser") {
     return params
       .addFilter("status", "1")
-      .addInclude(["field_media_image.field_media_image", "uid.user_picture"])
-      .addFields("node--article", ["title", "path", "field_media_image"])
+      .addInclude(["field_news_images.field_media_image"])
+      .addFields("node--news", ["title", "body", "path", "field_news_images"])
       .addFields("media--image", ["field_media_image"])
       .addFields("file--file", ["uri", "resourceIdObjMeta"])
+      .addPageLimit(5)
   }
 
-  if (name === "node--article") {
-    return params
-      .addInclude([
-        "field_media_image.field_media_image",
-        "uid.user_picture",
-        "field_tags",
-      ])
-      .addFields("node--article", [
-        "title",
-        "status",
-        "path",
-        "field_media_image",
-        "body",
-        "created",
-        "uid",
-        "field_tags",
-      ])
-      .addFields("user--user", ["display_name", "user_picture"])
-      .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
-      .addFields("taxonomy_term--tags", ["name", "path"])
-  }
-
-  if (name === "node--recipe--card") {
-    return params
-      .addFilter("status", "1")
-      .addInclude(["field_media_image.field_media_image", "uid.user_picture"])
-      .addFields("node--article", [
-        "title",
-        "path",
-        "field_media_image",
-        "field_difficulty",
-      ])
-      .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
-  }
-
-  if (name === "node--recipe") {
-    return params
-      .addInclude([
-        "field_media_image.field_media_image",
-        "field_recipe_category",
-        "field_tags",
-      ])
-      .addFields("node--recipe", [
-        "title",
-        "status",
-        "path",
-        "field_recipe_category",
-        "field_cooking_time",
-        "field_difficulty",
-        "field_ingredients",
-        "field_number_of_servings",
-        "field_preparation_time",
-        "field_recipe_instruction",
-        "field_summary",
-        "field_tags",
-        "field_media_image",
-      ])
-      .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
-      .addFields("taxonomy_term--recipe_category", ["name", "path"])
-      .addFields("taxonomy_term--tags", ["name", "path"])
-  }
+  // if (name === "node--article") {
+  //   return params
+  //     .addInclude([
+  //       "field_media_image.field_media_image",
+  //       "uid.user_picture",
+  //       "field_tags",
+  //     ])
+  //     .addFields("node--article", [
+  //       "title",
+  //       "status",
+  //       "path",
+  //       "field_media_image",
+  //       "body",
+  //       "created",
+  //       "uid",
+  //       "field_tags",
+  //     ])
+  //     .addFields("user--user", ["display_name", "user_picture"])
+  //     .addFields("media--image", ["field_media_image"])
+  //     .addFields("file--file", ["uri", "resourceIdObjMeta"])
+  //     .addFields("taxonomy_term--tags", ["name", "path"])
+  // }
 
   if (name === "block_content--banner_block") {
     return params

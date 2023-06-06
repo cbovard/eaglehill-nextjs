@@ -21,7 +21,7 @@ export default function ResourcePage({
 }: ResourcePageProps) {
   if (!resource) return null
 
-  //console.log(resource);
+  console.log(resource);
 
   return (
     <Layout
@@ -33,11 +33,6 @@ export default function ResourcePage({
       {resource.type === "node--page" && (
         <NodePage node={resource as DrupalNode} />
       )}
-      {/* {resource.type === "node--article" && (
-        <NodeArticle
-          node={resource as DrupalNode}
-        />
-      )} */}
     </Layout>
   )
 }
@@ -62,8 +57,6 @@ export async function getStaticProps(
       notFound: true,
     }
   }
-
-  //console.log(path.jsonapi.resourceName, 'path');
 
   // Fetch the resource from Drupal.
   const resource = await drupal.getResourceFromContext<DrupalNode>(

@@ -1,9 +1,7 @@
-import Image from "next/image"
 import { DrupalNode } from "next-drupal"
 
 import { Breadcrumbs } from "components/breadcrumbs"
 import { FormattedText } from "./formatted-text"
-import { absoluteURL } from "lib/utils"
 import { MediaImages } from "components/media--images"
 
 interface NodePageProps {
