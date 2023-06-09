@@ -10,7 +10,7 @@ export interface LayoutProps extends HeaderProps, FooterProps {
   children?: React.ReactNode
 }
 
-export function Layout({ meta, menus, children }: LayoutProps) {
+export function Layout({ meta, menus, children, blocks }: LayoutProps) {
   return (
     <>
       <Meta {...meta} />
@@ -18,7 +18,7 @@ export function Layout({ meta, menus, children }: LayoutProps) {
         <PreviewAlert />
         <Header menus={{ main: menus.main, quickLinks: menus.quickLinks }} />
         <main className="flex-1 pb-10 bg-body">{children}</main>
-        <Footer menus={{ footer: menus.footer }} />
+        <Footer menus={{ footer: menus.footer }} blocks={blocks} />
       </div>
       <TailwindIndicator />
     </>

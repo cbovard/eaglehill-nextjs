@@ -17,7 +17,7 @@ export default function NewsPage({
   menus,
 }: NewsPageProps) {
 
-  console.log(news)
+  // console.log(news)
 
   return (
     <Layout

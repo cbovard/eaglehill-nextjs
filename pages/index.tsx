@@ -19,10 +19,11 @@ interface IndexPageProps extends LayoutProps {
 
 export default function IndexPage({
   menus,
-  node
+  node,
+  blocks
 }: IndexPageProps) {
   return (
-    <Layout meta={{ title: "home" }} menus={menus}>
+    <Layout meta={{ title: "home" }} menus={menus} blocks={blocks}>
       <div className="container p-10">
         <NodePage node={node as DrupalNode} />
       </div>
@@ -33,19 +34,6 @@ export default function IndexPage({
 export async function getStaticProps(
   context: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<IndexPageProps>> {
-
-  const nodes = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--article",
-    context,
-    {
-      params: {
-        "filter[status]": 1,
-        "fields[node--article]": "title,path,field_image,uid,created",
-        include: "field_image,uid",
-        sort: "-created",
-      },
-    }
-  )
 
   // Get the Homepage by UUID.
   // /jsonapi/node/page/482e1cc3-d016-47d8-a164-53d7fb0b6b7e?include=field_page_images.field_media_image&fields[file--file]=uri,url

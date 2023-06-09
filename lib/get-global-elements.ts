@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetStaticPropsContext } from "next"
-import { DrupalBlock} from "next-drupal"
+import { DrupalBlock, DrupalView } from "next-drupal"
 
 import { drupal } from "lib/drupal"
 import { getParams } from "lib/get-params"
@@ -22,41 +22,11 @@ export async function getGlobalElements(
   const quickLinksMenu = await drupal.getMenu("header-quick-links", menuOpts)
   const footerMenu = await drupal.getMenu("footer", menuOpts)
 
-  // console.log(mainMenu);
-
-  // Fetch recipes collections view.
-  // const { results: recipeCollections } = await drupal.getView<
-  //   DrupalTaxonomyTerm[]
-  // >("recipe_collections--block", {
-  //   locale: context.locale,
-  //   defaultLocale: context.defaultLocale,
-  //   params: getParams("taxonomy_term--tags").addSort("name").getQueryObject(),
-  // })
-
-  // Fetch the footer promo block.
-  // You would normally use drupal.getResource() here to fetch the block by uuid.
-  // We're using getResourceCollection and a filter here because this demo needs
-  // to work on any Umami demo. UUIDs are different for every Umami install.
-  // const [footerPromo] = await drupal.getResourceCollectionFromContext<
-  //   DrupalBlock[]
-  // >("block_content--footer_promo_block", context, {
-  //   params: getParams("block_content--footer_promo_block")
-  //     .addFilter("info", "Umami footer promo")
-  //     .addPageLimit(1)
-  //     .getQueryObject(),
-  // })
-
-  // Fetch the disclaimer block.
-  // See comment above on why we use drupal.getResourceCollectionFromContext
-  // instead of drupal.getResource.
-  // const [disclaimer] = await drupal.getResourceCollectionFromContext<
-  //   DrupalBlock[]
-  // >("block_content--disclaimer_block", context, {
-  //   params: getParams("block_content--disclaimer_block")
-  //     .addFilter("info", "Umami Disclaimer")
-  //     .addPageLimit(1)
-  //     .getQueryObject(),
-  // })
+  // Fetch news block view.
+  const { results: newsBlock } = await drupal.getView<DrupalBlock[]
+  >("news--block_news_1", {
+    params: getParams("block_content--news_block").getQueryObject(),
+  })
 
   return {
     menus: {
@@ -64,10 +34,8 @@ export async function getGlobalElements(
       quickLinks: quickLinksMenu.items,
       footer: footerMenu.items,
     },
-    // blocks: {
-    //   recipeCollections,
-    //   footerPromo,
-    //   disclaimer,
-    // },
+    blocks: {
+      newsBlock,
+    },
   }
 }

@@ -22,9 +22,16 @@ export function NodeNewsTeaser({ node, ...props }: NodeNewsTeaserProps) {
           {node.title}
         </Link>
       </h2>
-      <section>
-        <p>{node.body?.processed && <TeaserText text={node.body.processed} />}</p>
-      </section>
+      {node.body.processed && (
+        <section>
+          <p className="text-black">{node.body?.processed && <TeaserText text={node.body.processed} />}</p>
+        </section>
+      )}
+      <Link href={node.path.alias}
+        className="hover:underline text-black text-link"
+        passHref>
+        read more +
+      </Link>
     </article>
   )
 }

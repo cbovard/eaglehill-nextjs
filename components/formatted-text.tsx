@@ -52,6 +52,7 @@ const options: HTMLReactParserOptions = {
 
 interface FormattedTextProps {
   text?: string
+  maxLength?: number
 }
 
 export function FormattedText({ text }: FormattedTextProps) {
@@ -60,12 +61,19 @@ export function FormattedText({ text }: FormattedTextProps) {
   return <>{parse(text, options)}</>
 }
 
-// Todo - This needs some serious work.
-export function TeaserText({ text }: FormattedTextProps) {
+// Todo - This needs some serious work. Can use the CSS instead maybe?
+// https://www.w3schools.com/cssref/css3_pr_text-overflow.php
+export function TeaserText({ text, maxLength }: FormattedTextProps) {
   if (!text) return null
 
+  // If there is no maxLength for the body.
+  // todo add this to teasers if needed.
+  const textLength = maxLength ? maxLength : 200
+
+  // Stupid amps.
+  text = text.replace(/&amp;/g, "&")
   const strippedString = text.replace(/(<([^>]+)>)/gi, "");
-  const strippedTruncatedString = strippedString.substring(0, 200) + '...';
+  const strippedTruncatedString = strippedString.substring(0, textLength) + '...';
 
   return <>{strippedTruncatedString}</>
 }
