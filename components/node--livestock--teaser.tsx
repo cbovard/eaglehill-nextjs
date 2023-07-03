@@ -8,7 +8,6 @@ interface NodeLivestockTeaserProps {
 }
 
 export function NodeLivestockTeaser({ node, ...props }: NodeLivestockTeaserProps) {
-
   return (
     <article
       className="relative flex flex-col p-4 space-y-4 overflow-hidden bg-white border border-border group"
@@ -22,9 +21,9 @@ export function NodeLivestockTeaser({ node, ...props }: NodeLivestockTeaserProps
           {node.title}
         </Link>
       </h2>
-      {node.body.processed && (
+      {node.body && (
         <section>
-          <p className="text-black">{node.body?.processed && <TeaserText text={node.body.processed} />}</p>
+          <p className="text-black"><TeaserText text={node.body.processed} /></p>
         </section>
       )}
       <Link href={node.path.alias}

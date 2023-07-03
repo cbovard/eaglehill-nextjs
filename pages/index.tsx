@@ -22,6 +22,9 @@ export default function IndexPage({
   node,
   blocks
 }: IndexPageProps) {
+
+  console.log(blocks);
+
   return (
     <Layout meta={{ title: "home" }} menus={menus} blocks={blocks}>
       <div className="container p-10">

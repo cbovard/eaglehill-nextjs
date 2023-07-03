@@ -1,5 +1,6 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next"
-import { DrupalNode } from "next-drupal"
+import { DrupalBlock, DrupalNode } from "next-drupal"
+// import { useRouter } from "next/router"
 
 import { drupal } from "lib/drupal"
 import { getGlobalElements } from "lib/get-global-elements"
@@ -15,16 +16,14 @@ interface LivestockPageProps extends LayoutProps {
 
 export default function LivestockPage({
   menus,
+  blocks,
   livestockView,
 }: LivestockPageProps) {
 
+  console.log(livestockView);
+
   return (
-    <Layout
-      menus={menus}
-      meta={{
-        title: "Our Livestock",
-      }}
-    >
+    <Layout meta={{ title: "Our Livestock" }} menus={menus} blocks={blocks}>
       <PageHeader
         heading="Our Livestock"
         breadcrumbs={[
@@ -57,13 +56,26 @@ export async function getStaticProps(
   context: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<LivestockPageProps>> {
 
+  //console.log(context);
+
   // todo need to move this more to a global.
   // /jsonapi/views/livestock/page_livestock?fields%5Bnode--livestock%5D=title%2Cbody%2Cpath%2Cfield_livestock_images&fields%5Bmedia--image%5D=field_media_image&fields%5Bfile--file%5D=uri%2CresourceIdObjMeta&include=field_livestock_images.field_media_image
   const params = new DrupalJsonApiParams()
-  .addInclude(["field_livestock_images.field_media_image"])
-  .addFields("node--livestock", ["title", "body", "path", "field_livestock_images"])
-  .addFields("media--image", ["field_media_image"])
-  .addFields("file--file", ["uri", "resourceIdObjMeta"])
+    .addInclude(["field_livestock_images.field_media_image"])
+    .addFields("node--livestock", ["title", "body", "path", "field_livestock_images"])
+    .addFields("media--image", ["field_media_image"])
+    .addFields("file--file", ["uri", "resourceIdObjMeta"])
+    // .addPageLimit(5)
+    // .addCustomParam({ 'bar: ['a', 'b', 'c']})
+
+  // const viewJSON = params.getQueryObject();
+  // viewJSON['page'] = 1;
+  // console.log(viewJSON);
+
+  // console.log(JSON.stringify(params.getQueryObject()));
+
+  // const queryString = params.getQueryString({ encode: false });
+
 
   const livestockView = await drupal.getView("livestock--page_livestock", {
     params: params.getQueryObject(),

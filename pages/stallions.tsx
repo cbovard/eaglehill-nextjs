@@ -15,16 +15,12 @@ interface StallionsPageProps extends LayoutProps {
 
 export default function StallionsPage({
   menus,
+  blocks,
   livestockView,
 }: StallionsPageProps) {
 
   return (
-    <Layout
-      menus={menus}
-      meta={{
-        title: "Stallions",
-      }}
-    >
+    <Layout meta={{ title: "Stallions" }} menus={menus} blocks={blocks}>
       <PageHeader
         heading="Stallions"
         breadcrumbs={[
