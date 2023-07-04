@@ -77,7 +77,7 @@ export async function getStaticProps(
   // const queryString = params.getQueryString({ encode: false });
 
 
-  const livestockView = await drupal.getView("livestock--page_livestock", {
+  const livestockView = await drupal.getView("livestock--page_news_1", {
     params: params.getQueryObject(),
   })
 

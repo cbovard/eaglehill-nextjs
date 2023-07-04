@@ -23,7 +23,7 @@ export default function IndexPage({
   blocks
 }: IndexPageProps) {
 
-  console.log(blocks);
+  //console.log(blocks);
 
   return (
     <Layout meta={{ title: "home" }} menus={menus} blocks={blocks}>
