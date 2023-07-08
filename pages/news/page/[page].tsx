@@ -8,17 +8,24 @@ import { Layout, LayoutProps } from "components/layout"
 import { Pager, PagerProps } from "components/pager"
 // import { Node } from "components/node"
 // import { Meta } from "components/meta"
+import { stringify } from "qs"
 
 export const NUMBER_OF_POSTS_PER_PAGE = 10
 
 export interface NewsPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">
-  nodes: DrupalNode[]
+  //nodes: DrupalNode[]
+  nodes: any
 }
 
 export default function NewsPage({ nodes, menus, page, blocks }: NewsPageProps) {
   const { locale } = useRouter()
   const title = locale === "en" ? "Latest Articles." : "Últimas Publicaciones."
+
+  //console.log(nodes.results[0].field_news_images[0].field_media_image.uri.url, 'Views function out');
+
+
+    console.log(nodes);
 
   return (
     <Layout menus={menus} blocks={blocks}>
@@ -67,51 +74,73 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<NewsPageProps>> {
+
   const current = parseInt(context.params.page)
 
+  ///console.log(context.params.page, 'context params')
+
+  // const params = new DrupalJsonApiParams()
+  //   .addFields("node--news", [
+  //     "title",
+  //     "path",
+  //     "body",
+  //     "uid",
+  //     "created",
+  //   ])
+  //   .addFilter("status", "1")
+  //   .addSort("created", "DESC")
+
+  // const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
+  //   "node--news",
+  //   context,
+  //   {
+  //     deserialize: false,
+  //     params: {
+  //       ...params.getQueryObject(),
+  //       page: {
+  //         limit: NUMBER_OF_POSTS_PER_PAGE,
+  //         offset: context.params.page ? NUMBER_OF_POSTS_PER_PAGE * current : 0,
+  //       },
+  //     },
+  //   }
+  // )
+
   const params = new DrupalJsonApiParams()
-    // .addFilter(
-    //   "field_site.meta.drupal_internal__target_id",
-    //   process.env.DRUPAL_SITE_ID
-    // )
-    .addFields("node--news", [
-      "title",
-      "path",
-      "body",
-      "uid",
-      "created",
-    ])
-    .addFilter("status", "1")
-    .addSort("created", "DESC")
+    .addInclude(["field_news_images.field_media_image"])
+    .addFields("node--news", ["title", "body", "path", "field_news_images"])
+    .addFields("media--image", ["field_media_image"])
+    .addFields("file--file", ["uri", "resourceIdObjMeta"])
+    .addCustomParam({page: '1'})
+    .getQueryObject()
 
-  const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
-    "node--news",
-    context,
-    {
-      deserialize: false,
-      params: {
-        ...params.getQueryObject(),
-        page: {
-          limit: NUMBER_OF_POSTS_PER_PAGE,
-          offset: context.params.page ? NUMBER_OF_POSTS_PER_PAGE * current : 0,
-        },
-      },
-    }
-  )
+  // WORKING with Above.
+  const result = await drupal.getView("news--page_news_1", {
+    params: params,
+  })
 
-  if (!result.data?.length) {
-    return {
-      notFound: true,
-    }
-  }
+
+
+
+
+  // const newsViewJSONPath = `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/views/news/page_news_1?fields[node--news]=title,body,path,field_news_images&fields[file--file]=uri,resourceIdObjMeta&include=field_news_images.field_media_image`
+  // const newsViewJSONPath = `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/views/news/page_news_1`
+  // const res = await fetch(newsViewJSONPath)
+  // const result = await res.json()
+
+  // Fix this!!
+  // if (!result.data?.length) {
+  //   return {
+  //     notFound: true,
+  //   }
+  // }
 
   // empty
   //console.log(result.meta.count);
 
+  // does not work?
+  // const nodes = drupal.deserialize(result) as DrupalNode[]
 
-  const nodes = drupal.deserialize(result) as DrupalNode[]
-
-  // const nodes = result
+  const nodes = result
 
   return {
     props: {
