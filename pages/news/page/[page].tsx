@@ -1,43 +1,45 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next"
-import { useRouter } from "next/router"
-import { DrupalNode, JsonApiResponse } from "next-drupal"
-import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { getGlobalElements } from "lib/get-global-elements"
-import { drupal } from "lib/drupal"
 import { Layout, LayoutProps } from "components/layout"
 import { Pager, PagerProps } from "components/pager"
-// import { Node } from "components/node"
+import { getCustomDrupalView } from "lib/utils"
+import { PageHeader } from "components/page-header"
+import { Node } from "components/node"
+// GET THE META SEO GOING
 // import { Meta } from "components/meta"
-import { stringify } from "qs"
 
 export const NUMBER_OF_POSTS_PER_PAGE = 10
 
 export interface NewsPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">
-  //nodes: DrupalNode[]
   nodes: any
 }
 
-export default function NewsPage({ nodes, menus, page, blocks }: NewsPageProps) {
-  const { locale } = useRouter()
-  const title = locale === "en" ? "Latest Articles." : "Últimas Publicaciones."
+export default function NewsPage({
+  menus,
+  blocks,
+  page,
+  nodes,
+}: NewsPageProps) {
 
-  //console.log(nodes.results[0].field_news_images[0].field_media_image.uri.url, 'Views function out');
-
-
-    console.log(nodes);
+  console.log(nodes.results.length, 'new code 6')
 
   return (
-    <Layout menus={menus} blocks={blocks}>
+    <Layout meta={{ title: "News" }} menus={menus} blocks={blocks}>
+      <PageHeader
+        heading="News"
+        breadcrumbs={[
+          {
+            title: "News",
+          },
+        ]}
+      />
       <div className="container max-w-6xl px-6 pt-10 mx-auto md:py-20">
-        <h1 className="mb-10 text-3xl font-black sm:text-4xl md:text-5xl lg:text-6xl">
-          {title}
-        </h1>
-        {nodes.length ? (
+        {nodes.results.length ? (
           <div className="grid gap-20 md:grid-cols-2">
-            {/* {nodes.map((article) => (
-              <Node viewMode="teaser" key={article.id} node={article} />
-            ))} */}
+            {nodes.results.map((newsNode) => (
+              <Node viewMode="teaser" key={newsNode.id} node={newsNode} />
+            ))}
           </div>
         ) : (
           <p className="py-6">No posts found</p>
@@ -75,70 +77,14 @@ export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<NewsPageProps>> {
 
+  // For the main news page this will be 0.
   const current = parseInt(context.params.page)
 
-  ///console.log(context.params.page, 'context params')
-
-  // const params = new DrupalJsonApiParams()
-  //   .addFields("node--news", [
-  //     "title",
-  //     "path",
-  //     "body",
-  //     "uid",
-  //     "created",
-  //   ])
-  //   .addFilter("status", "1")
-  //   .addSort("created", "DESC")
-
-  // const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
-  //   "node--news",
-  //   context,
-  //   {
-  //     deserialize: false,
-  //     params: {
-  //       ...params.getQueryObject(),
-  //       page: {
-  //         limit: NUMBER_OF_POSTS_PER_PAGE,
-  //         offset: context.params.page ? NUMBER_OF_POSTS_PER_PAGE * current : 0,
-  //       },
-  //     },
-  //   }
-  // )
-
-  const params = new DrupalJsonApiParams()
-    .addInclude(["field_news_images.field_media_image"])
-    .addFields("node--news", ["title", "body", "path", "field_news_images"])
-    .addFields("media--image", ["field_media_image"])
-    .addFields("file--file", ["uri", "resourceIdObjMeta"])
-    .addCustomParam({page: '1'})
-    .getQueryObject()
-
-  // WORKING with Above.
-  const result = await drupal.getView("news--page_news_1", {
+  const params = '?include=field_news_images.field_media_image'
+  const result = await getCustomDrupalView("news--page_news_1", {
     params: params,
+    current: current,
   })
-
-
-
-
-
-  // const newsViewJSONPath = `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/views/news/page_news_1?fields[node--news]=title,body,path,field_news_images&fields[file--file]=uri,resourceIdObjMeta&include=field_news_images.field_media_image`
-  // const newsViewJSONPath = `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/views/news/page_news_1`
-  // const res = await fetch(newsViewJSONPath)
-  // const result = await res.json()
-
-  // Fix this!!
-  // if (!result.data?.length) {
-  //   return {
-  //     notFound: true,
-  //   }
-  // }
-
-  // empty
-  //console.log(result.meta.count);
-
-  // does not work?
-  // const nodes = drupal.deserialize(result) as DrupalNode[]
 
   const nodes = result
 
@@ -148,7 +94,7 @@ export async function getStaticProps(
       nodes,
       page: {
         current,
-        total: Math.ceil(20 / NUMBER_OF_POSTS_PER_PAGE),
+        total: Math.ceil(result.meta.count / NUMBER_OF_POSTS_PER_PAGE),
       },
     },
   }

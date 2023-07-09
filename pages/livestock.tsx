@@ -20,7 +20,7 @@ export default function LivestockPage({
   livestockView,
 }: LivestockPageProps) {
 
-  console.log(livestockView);
+  // console.log(livestockView);
 
   return (
     <Layout meta={{ title: "Our Livestock" }} menus={menus} blocks={blocks}>
