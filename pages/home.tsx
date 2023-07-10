@@ -23,10 +23,9 @@ export default function IndexPage({
   blocks
 }: IndexPageProps) {
 
-  //console.log(blocks);
 
   return (
-    <Layout meta={{ title: "home" }} menus={menus} blocks={blocks}>
+    <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <div className="container p-10">
         <NodePage node={node as DrupalNode} />
       </div>

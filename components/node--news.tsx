@@ -1,10 +1,11 @@
 import Link from "next/link"
 import Image from "next/image"
 
-import { formatDate } from "lib/utils/format-date"
-import { absoluteURL } from "lib/utils/absolute-url"
-import { FormattedText } from "components/formatted-text"
 import { NodeProps } from "components/node"
+import { MediaImages } from "components/media--images"
+import { absoluteURL } from "lib/utils"
+import { FormattedText, TeaserText } from "./formatted-text"
+
 
 export function NodeNews({ node, viewMode, ...props }: NodeProps) {
   if (viewMode === "teaser") {
@@ -19,90 +20,60 @@ export function NodeNews({ node, viewMode, ...props }: NodeProps) {
 }
 
 export function NodeNewsFull({ node, ...props }) {
+
+  console.log(node)
+
   return (
-    <article data-cy="node--news" {...props}>
-      <div className="container max-w-3xl px-6 mx-auto my-10 md:my-18">
-        <h1 className="mb-4 text-2xl font-bold md:text-3xl lg:text-5xl">
-          {node.title}
-        </h1>
-        <div className="prose">
-          <div data-cy="node--meta" className="text-gray-600">
-            {/* {node.uid?.field_name ? (
-              <span>
-                Posted by <strong>{node.uid?.field_name}</strong>
-              </span>
-            ) : null}
-            <span> - {formatDate(node.created)}</span> */}
-          </div>
-          {node.body?.summary ? <p>{node.body.summary}</p> : null}
-          {/* {node.field_image?.uri && (
-            <Image
-              src={absoluteURL(node.field_image.uri.url)}
-              width={1200}
-              height={600}
-              layout="intrinsic"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-          )} */}
-          {/* {node.body?.processed && (
-            <FormattedText processed={node.body.processed} />
-          )} */}
-        </div>
+    <article className="bg-white border text-text p-9 border-border">
+    <h1 className="font-serif text-2xl leading-tight lg:text-4xl">
+      {node.title}
+    </h1>
+    <div className="mt-4 prose prose-a:text-link max-w-none text-text">
+      {node.body?.processed && <FormattedText text={node.body.processed} />}
+    </div>
+    {node.field_news_images?.length ? (
+      <div>
+        <MediaImages media={node.field_news_images} teaser={false} />
       </div>
-    </article>
+    ) : null}
+  </article>
   )
 }
 
 export function NodeNewsTeaser({ node, ...props }) {
   return (
-    <article data-cy="node--news" {...props}>
-      {node.field_image?.uri && (
+    <article
+      className="relative flex flex-col p-4 space-y-4 overflow-hidden bg-white border border-border group"
+      {...props}
+    >
+      {node.field_news_images[0].field_media_image?.uri && (
         <div>
-          {/* <Image
-            src={absoluteURL(node.field_image.uri.url)}
-            width={800}
-            height={450}
-            layout="intrinsic"
-            objectFit="cover"
-            className="rounded-lg"
-          /> */}
+          <Image
+            src={absoluteURL(node.field_news_images[0].field_media_image.uri.url)}
+            alt={node.field_news_images[0].field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
+            width={200}
+            height={200}
+            className="w-full h-auto"
+          />
         </div>
       )}
-      <h2 className="my-4 text-2xl font-semibold md:text-3xl">
-        {/* <Link href={node.path?.alias} passHref>
-          <a className="hover:text-blue-500">{node.title}</a>
-        </Link> */}
+      <h2 className="flex-1 font-serif text-2xl">
+        <Link href={node.path.alias}
+          className="inline-flex items-center uppercase hover:underline text-link"
+          passHref>
+          {node.title}
+        </Link>
       </h2>
-      {/* <div data-cy="node--meta" className="text-gray-600">
-        {node.uid?.field_name ? (
-          <span>
-            Posted by <strong>{node.uid?.field_name}</strong>
-          </span>
-        ) : null}
-        <span> - {formatDate(node.created)}</span>
-      </div> */}
-      {node.body?.summary ? (
-        <p className="mt-4 leading-relaxed text-gray-600">
-          {node.body.summary}
-        </p>
-      ) : null}
-      {/* <Link href={node.path.alias} passHref>
-        <a className="flex items-center mt-4 text-sm hover:text-blue-500">
-          Read more
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4 ml-2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-      </Link> */}
+      {node.body.processed && (
+        <section>
+          <p className="text-black">{node.body?.processed && <TeaserText text={node.body.processed} />}</p>
+        </section>
+      )}
+      <Link href={node.path.alias}
+        className="hover:underline text-black text-link"
+        passHref>
+        read more +
+      </Link>
     </article>
   )
 }

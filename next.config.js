@@ -10,6 +10,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/",
+        destination: "/home",
+      },
+      {
         source: "/news",
         destination: "/news/page/0",
       },

@@ -18,15 +18,14 @@ export function getParams(
       .addFields("file--file", ["uri", "resourceIdObjMeta"])
   }
 
-  // if (name === "node--news--teaser") {
-  //   return params
-  //     .addFilter("status", "1")
-  //     .addInclude(["field_news_images.field_media_image"])
-  //     .addFields("node--news", ["title", "body", "path", "field_news_images"])
-  //     .addFields("media--image", ["field_media_image"])
-  //     .addFields("file--file", ["uri", "resourceIdObjMeta"])
-  //     .addPageLimit(10)
-  // }
+  if (name === "node--news") {
+    return params
+      .addFilter("status", "1")
+      .addInclude(["field_news_images.field_media_image"])
+      .addFields("node--news", ["title", "body", "status", "field_news_images"])
+      .addFields("media--image", ["field_media_image"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta"])
+  }
 
   if (name === "block_content--news_block") {
     return params.addFields("node--news", [

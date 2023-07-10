@@ -22,8 +22,6 @@ export default function NewsPage({
   nodes,
 }: NewsPageProps) {
 
-  console.log(nodes.results.length, 'new code 6')
-
   return (
     <Layout meta={{ title: "News" }} menus={menus} blocks={blocks}>
       <PageHeader
@@ -80,13 +78,16 @@ export async function getStaticProps(
   // For the main news page this will be 0.
   const current = parseInt(context.params.page)
 
-  const params = '?include=field_news_images.field_media_image'
-  const result = await getCustomDrupalView("news--page_news_1", {
+  let params = '?include=field_news_images.field_media_image'
+  // If this is not 1st page.
+  if (current != 0){
+    params = params + `&page=${current}`
+  }
+
+  const nodes = await getCustomDrupalView("news--page_news_1", {
     params: params,
     current: current,
   })
-
-  const nodes = result
 
   return {
     props: {
@@ -94,7 +95,7 @@ export async function getStaticProps(
       nodes,
       page: {
         current,
-        total: Math.ceil(result.meta.count / NUMBER_OF_POSTS_PER_PAGE),
+        total: Math.ceil(nodes.meta.count / NUMBER_OF_POSTS_PER_PAGE),
       },
     },
   }

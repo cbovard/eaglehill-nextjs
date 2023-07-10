@@ -19,8 +19,6 @@ export interface NodeProps {
 
 export function Node({ node, viewMode = "full", ...props }: NodeProps) {
 
-  //console.log(node, 'node.tsx')
-
   if (!node) {
     return null
   }
