@@ -7,11 +7,7 @@ import { getGlobalElements } from "lib/get-global-elements"
 import { getParams } from "lib/get-params"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { Layout, LayoutProps } from "components/layout"
-import { NodePage } from "components/node--page"
-
-const RESOURCE_TYPES = [
-  "node--page",
-]
+import { NodeFrontPage } from "components/node--front--page"
 
 interface IndexPageProps extends LayoutProps {
   node: DrupalNode
@@ -27,7 +23,7 @@ export default function IndexPage({
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <div className="container p-10">
-        <NodePage node={node as DrupalNode} />
+        <NodeFrontPage node={node as DrupalNode} />
       </div>
     </Layout>
   )

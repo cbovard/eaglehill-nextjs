@@ -1,15 +1,13 @@
 import { DrupalNode } from "next-drupal"
 
-// import { NodePage } from "components/node--page"
+import { NodePage } from "components/node--page"
 import { NodeNews } from "components/node--news"
-// import { NodeLandingPage } from "components/node--landing-page"
-// import { NodeProperty } from "components/node--property"
+import { NodeLivestock } from "components/node--livestock"
 
 const nodeTypes = {
-  // "node--page": NodePage,
+  "node--page": NodePage,
   "node--news": NodeNews,
-  //"node--landing_page": NodeLandingPage,
-  //"node--property_listing": NodeProperty,
+  "node--livestock": NodeLivestock,
 }
 
 export interface NodeProps {

@@ -27,6 +27,15 @@ export function getParams(
       .addFields("file--file", ["uri", "resourceIdObjMeta"])
   }
 
+  if (name === "node--livestock") {
+    return params
+      .addFilter("status", "1")
+      .addInclude(["field_livestock_images.field_media_image"])
+      .addFields("node--livestock", ["title", "body", "status", "field_livestock_images", "field_price_fee"])
+      .addFields("media--image", ["field_media_image"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta"])
+  }
+
   if (name === "block_content--news_block") {
     return params.addFields("node--news", [
       "title",
@@ -40,5 +49,4 @@ export function getParams(
       "title,url",
     ])
   }
-
 }

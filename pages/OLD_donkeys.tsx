@@ -18,8 +18,6 @@ export default function DonkeysPage({
   livestockView,
 }: DonkeysPageProps) {
 
-  console.log(livestockView);
-
   return (
     <Layout
       menus={menus}

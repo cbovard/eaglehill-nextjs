@@ -4,13 +4,10 @@ import {
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from "next"
-import { useRouter } from "next/router"
 import { DrupalNode } from "next-drupal"
 
 import { drupal } from "lib/drupal"
 import { getGlobalElements } from "lib/get-global-elements"
-//import { getMenus } from "lib/get-menus"
-//import { absoluteURL } from "lib/utils/absolute-url"
 import { getParams } from "lib/get-params"
 import { Layout, LayoutProps } from "components/layout"
 import { Node } from "components/node"
@@ -55,7 +52,6 @@ export async function getStaticProps(
   }
 
   const type = path.jsonapi.resourceName
-
   const node = await drupal.getResourceFromContext<DrupalNode>(path, context, {
     params: getParams(type),
   })
