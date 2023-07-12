@@ -46,10 +46,10 @@ export function NodeNewsTeaser({ node, ...props }) {
       {node.field_news_images[0].field_media_image?.uri && (
         <div>
           <Image
-            src={absoluteURL(node.field_news_images[0].field_media_image.uri.url)}
+            src={node.field_news_images[0].field_media_image.image_style_uri.image_164x111}
             alt={node.field_news_images[0].field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
-            width={200}
-            height={200}
+            width={164}
+            height={111}
             className="w-full h-auto"
           />
         </div>

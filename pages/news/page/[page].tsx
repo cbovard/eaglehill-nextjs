@@ -28,6 +28,8 @@ export default function NewsPage({
     pageCount = true
   }
 
+  console.log(page.total)
+
   return (
     <Layout meta={{ title: "News" }} menus={menus} blocks={blocks}>
       <PageHeader
