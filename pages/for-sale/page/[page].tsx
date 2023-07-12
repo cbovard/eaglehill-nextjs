@@ -22,11 +22,8 @@ export default function ForSalePagePage({
   nodes,
 }: ForSalePageProps) {
 
-  // If there is only one page of nodes
-  let pageCount = false
-  if (page.total > 1) {
-    pageCount = true
-  }
+  // If there is only one page of nodes.
+  const pageCount = (page.total > 1) ? true : false;
 
   return (
     <Layout meta={{ title: "Livestock For Sale" }} menus={menus} blocks={blocks}>

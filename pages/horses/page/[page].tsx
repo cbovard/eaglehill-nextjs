@@ -22,11 +22,8 @@ export default function HorsesPagePage({
   nodes,
 }: HorsesPageProps) {
 
-  // If there is only one page of nodes
-  let pageCount = false
-  if (page.total > 1) {
-    pageCount = true
-  }
+  // If there is only one page of nodes.
+  const pageCount = (page.total > 1) ? true : false;
 
   return (
     <Layout meta={{ title: "Our Horses" }} menus={menus} blocks={blocks}>

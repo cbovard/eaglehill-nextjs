@@ -7,6 +7,7 @@ import { getGlobalElements } from "lib/get-global-elements"
 import { getParams } from "lib/get-params"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { Layout, LayoutProps } from "components/layout"
+import Carousel from "components/carousel";
 import { NodeFrontPage } from "components/node--front--page"
 
 interface IndexPageProps extends LayoutProps {
@@ -19,9 +20,20 @@ export default function IndexPage({
   blocks
 }: IndexPageProps) {
 
+  const images = [
+    'https://images.dog.ceo/breeds/weimaraner/n02092339_8024.jpg',
+    'https://images.dog.ceo/breeds/poodle-standard/n02113799_1140.jpg',
+    'https://images.dog.ceo/breeds/ovcharka-caucasian/IMG_20190611_152047.jpg',
+  ];
+
+  // console.log(images);
+
 
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
+      <div className="container p-10">
+        <Carousel images={images} />
+      </div>
       <div className="container p-10">
         <NodeFrontPage node={node as DrupalNode} />
       </div>
@@ -39,7 +51,7 @@ export async function getStaticProps(
   .addInclude(["field_page_images.field_media_image"])
   .addFields("node--page", ["title", "body", "status", "field_page_images"])
   .addFields("media--image", ["field_media_image"])
-  .addFields("file--file", ["uri", "resourceIdObjMeta"])
+  .addFields("file--file", ["uri", "resourceIdObjMeta", "image_style_uri"])
 
   const node = await drupal.getResource<DrupalNode>(
     "node--page",

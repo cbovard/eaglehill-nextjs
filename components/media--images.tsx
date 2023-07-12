@@ -20,17 +20,21 @@ export function MediaImages({
     return null
   }
 
-  // todo get image styles here with a Prop
+  console.log(images)
+
+  // todo - need to move below to a component and get image styles.
+  // The front page does not have the image styles.
+  // Need to change it to the [[...slug]].tsx page
   // Get all the images.
   return (
     <div>
     {images.map((image) => (
       <div key={image.id} className="media__content image__wrapper" {...props}>
         <Image
-          src={absoluteURL(image.field_media_image.image_style_uri.image_164x111)}
+          src={absoluteURL(image.field_media_image.uri.url)}
           alt={image.field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
-          width={164}
-          height={111}
+          width={500}
+          height={500}
         />
       </div>
     ))}

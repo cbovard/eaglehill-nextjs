@@ -22,13 +22,8 @@ export default function NewsPage({
   nodes,
 }: NewsPageProps) {
 
-  // If there is only one page of nodes
-  let pageCount = false
-  if (page.total > 1) {
-    pageCount = true
-  }
-
-  console.log(page.total)
+  // If there is only one page of nodes.
+  const pageCount = (page.total > 1) ? true : false;
 
   return (
     <Layout meta={{ title: "News" }} menus={menus} blocks={blocks}>
