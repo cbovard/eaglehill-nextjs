@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
   .container {
     @apply px-4 md:px-8 mx-auto;
   }
-}
-
-#nprogress .bar {
-  background: #da3c13;
-}
+} */

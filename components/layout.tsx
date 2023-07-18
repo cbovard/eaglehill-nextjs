@@ -1,5 +1,4 @@
 import { Meta, MetaProps } from "components/meta"
-import { PreviewAlert } from "components/preview-alert"
 import { Header, HeaderProps } from "components/header"
 import { Footer, FooterProps } from "components/footer"
 import { TailwindIndicator } from "components/tailwind-indicator"
@@ -14,12 +13,9 @@ export function Layout({ meta, menus, children, blocks }: LayoutProps) {
   return (
     <>
       <Meta {...meta} />
-      <div className="flex flex-col min-h-screen">
-        <PreviewAlert />
-        <Header menus={{ main: menus.main, quickLinks: menus.quickLinks }} />
-        <main className="flex-1 pb-10 bg-body">{children}</main>
-        <Footer menus={{ footer: menus.footer }} blocks={blocks} />
-      </div>
+      <Header menus={{ main: menus.main, quickLinks: menus.quickLinks }} />
+      <main className="xl:container xl:mx-auto">{children}</main>
+      <Footer menus={{ footer: menus.footer }} blocks={blocks} />
       <TailwindIndicator />
     </>
   )

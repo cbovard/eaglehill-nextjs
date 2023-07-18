@@ -14,7 +14,7 @@ export interface FooterProps {
 
 export function Footer({ menus, blocks }: FooterProps) {
   return (
-    <footer>
+    <footer className="xl:container xl:mx-auto">
       <section className="py-8 text-white bg-gray-darker">
         <div className="container justify-between lg:grid lg:grid-cols-[6fr_1.5fr_2.5fr]">
           {blocks?.newsBlock && (

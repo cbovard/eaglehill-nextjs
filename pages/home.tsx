@@ -32,9 +32,9 @@ export default function IndexPage({
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <div className="container p-10">
-        <Carousel images={images} />
+        {/* <Carousel images={images} /> */}
       </div>
-      <div className="container p-10">
+      <div className="container p-10 bg">
         <NodeFrontPage node={node as DrupalNode} />
       </div>
     </Layout>

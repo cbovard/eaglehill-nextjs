@@ -20,7 +20,7 @@ export function MediaImages({
     return null
   }
 
-  console.log(images)
+  //console.log(images)
 
   // todo - need to move below to a component and get image styles.
   // The front page does not have the image styles.

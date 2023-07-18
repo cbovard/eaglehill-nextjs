@@ -5,6 +5,8 @@ import classNames from "classnames"
 
 import siteConfig from "site.config"
 // import { Logo } from "components/logo"
+import Image from 'next/image'
+import logoImage from '../public/images/logo.png'
 import { MenuMain } from "components/menu-main"
 import { MenuQuickLinks } from "components/menu-quick-links"
 
@@ -19,49 +21,71 @@ export function Header({ menus }: HeaderProps) {
   const [showMenu, setShowMenu] = React.useState<Boolean>(false)
 
   return (
-    <header className="bg-white">
-      <div className="container">
-        <div className="grid items-center justify-between grid-cols-3 py-4 border-b border-gray-lighter md:py-6">
-          <div>
-          </div>
-          <div className="flex justify-center">
-          </div>
-          <div className="flex justify-end">
-            <MenuQuickLinks items={menus.quickLinks} />
-          </div>
-        </div>
+    <header className="xl:container xl:mx-auto p-5">
+      <div className="hidden">
+        <MenuQuickLinks items={menus.quickLinks} />
       </div>
-      <div className="container relative flex-wrap items-center justify-between py-6 md:flex lg:py-10">
-        <Link href="/" passHref className="flex justify-start">
-          {siteConfig.name}
+      <div className="w-full">
+        <Link href="/" passHref>
+          <Image
+            src={logoImage}
+            alt={siteConfig.name}
+            priority={true}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          />
           <span className="sr-only">{siteConfig.name}</span>
         </Link>
-        <button
-          className="absolute transition-all border beorder-transparent md:hidden right-4 top-8 hover:border-link"
-          onClick={() => setShowMenu(!showMenu)}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-8 h-8"
+      </div>
+      <button className=" absolute right-4 top-8 w-8 h-8 md:hidden border border-transparent text-white focus:outline-none bg-transparent"
+      onClick={() => setShowMenu(!showMenu)}
+      >
+        <span className="sr-only">Open main menu</span>
+        <span className="block w-7 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <span aria-hidden="true"
+            className={classNames(
+              "block absolute h-[0.1875rem] w-7 bg-current transform transition duration-500 ease-in-out",
+              {
+                "rotate-45": showMenu,
+                "-translate-y-[0.475rem]": !showMenu,
+              }
+            )}
           >
-            <path d="M3 12h18M3 6h18M3 18h18" />
-          </svg>
-        </button>
-        <div
-          className={classNames(
-            "max-h-0 transition-all overflow-hidden md:max-h-screen",
-            {
-              "max-h-screen": showMenu,
-            }
-          )}
-        >
-          <MenuMain items={menus.main} />
-        </div>
+          </span>
+          <span aria-hidden="true"
+            className={classNames(
+              "block absolute h-[0.1875rem] w-7 bg-current transform transition duration-500 ease-in-out",
+              {
+                "opacity-0": showMenu,
+              }
+            )}
+          >
+          </span>
+          <span aria-hidden="true"
+            className={classNames(
+              "block absolute h-[0.1875rem] w-7 bg-current transform transition duration-500 ease-in-out",
+              {
+                "-rotate-45": showMenu,
+                "translate-y-[0.475rem]": !showMenu,
+              }
+            )}
+          >
+          </span>
+        </span>
+      </button>
+      <div
+        className={classNames(
+          "max-h-0 transition-all overflow-hidden md:max-h-screen",
+          {
+            "max-h-screen": showMenu,
+          }
+        )}
+      >
+        <MenuMain items={menus.main} />
       </div>
     </header>
   );
