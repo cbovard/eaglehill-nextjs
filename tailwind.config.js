@@ -8,7 +8,11 @@ module.exports = {
     extend: {
       backgroundImage:{
         'wood-pattern': "url('../public/images/bg-wood-pattern.jpg')",
-      }
+        'grass-pattern': "url('../public/images/bg-grass-pattern.png')",
+      },
+      fontFamily: {
+        'bebas-neue': ['"Bebas Neue"', 'sans-serif'],
+      },
     },
   },
   variants: {

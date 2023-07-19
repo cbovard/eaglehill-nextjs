@@ -14,7 +14,7 @@ export interface FooterProps {
 
 export function Footer({ menus, blocks }: FooterProps) {
   return (
-    <footer className="xl:container xl:mx-auto">
+    <footer className="xl:container xl:mx-auto bg-grass-pattern bg-repeat-x bg-bottom">
       <section className="py-8 text-white bg-gray-darker">
         <div className="container justify-between lg:grid lg:grid-cols-[6fr_1.5fr_2.5fr]">
           {blocks?.newsBlock && (
@@ -50,7 +50,7 @@ export function Footer({ menus, blocks }: FooterProps) {
           ) : null}
         </div>
       </section>
-      <p className="mb-6 md:mb-0">
+      <p>
         © {new Date().getFullYear()} Eagle Hill Equine
       </p>
     </footer>

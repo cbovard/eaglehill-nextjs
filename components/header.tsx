@@ -26,22 +26,22 @@ export function Header({ menus }: HeaderProps) {
         <MenuQuickLinks items={menus.quickLinks} />
       </div>
       <div className="w-full">
-        <Link href="/" passHref>
-          <Image
-            src={logoImage}
-            alt={siteConfig.name}
-            priority={true}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          />
-          <span className="sr-only">{siteConfig.name}</span>
-        </Link>
+        <div className="max-w-[70%] mx-auto pt-3">
+          <Link href="/" passHref>
+            <Image
+              src={logoImage}
+              alt={siteConfig.name}
+              priority={true}
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+              }}
+            />
+            <span className="sr-only">{siteConfig.name}</span>
+          </Link>
+        </div>
       </div>
-      <button className=" absolute right-4 top-8 w-8 h-8 md:hidden border border-transparent text-white focus:outline-none bg-transparent"
+      <button className="absolute right-5 top-8 w-8 h-8 md:hidden border border-transparent text-white focus:outline-none bg-transparent"
       onClick={() => setShowMenu(!showMenu)}
       >
         <span className="sr-only">Open main menu</span>
