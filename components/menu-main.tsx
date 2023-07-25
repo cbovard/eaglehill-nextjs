@@ -25,7 +25,7 @@ export function MenuMain({ items, ...props }: MenuMainProps) {
                 href={item.url}
                 passHref
                 className={classNames(
-                  "block pt-[0.70rem] pb-2 pl-3 pr-4 rounded border border-lime-700 bg-gradient-to-b from-lime-800 to-lime-900 md:p-0 font-bebas-neue text-2xl tracking-wide text-white transition-colors hover:text-amber-400",
+                  "block pt-[0.70rem] pb-2 pl-3 pr-4 rounded border border-deep-fir-800 bg-gradient-to-b from-deep-fir-900 to-deep-fir-950 md:p-0 font-bebas-neue text-2xl tracking-wide text-white transition-colors hover:text-amber-400",
                   {
                     "text-amber-400": isActive,
                   }

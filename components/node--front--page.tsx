@@ -1,5 +1,4 @@
 import { DrupalNode } from "next-drupal"
-import { Breadcrumbs } from "components/breadcrumbs"
 import { FormattedText } from "./formatted-text"
 import { MediaImages } from "components/media--images"
 
@@ -8,33 +7,23 @@ interface NodeFrontPageProps {
 }
 
 export function NodeFrontPage({ node }: NodeFrontPageProps) {
-
-  // const isFront = (node.id == '482e1cc3-d016-47d8-a164-53d7fb0b6b7e') ? 'isFront' : 'notFront';
-
   return (
-    <div className="container">
-      {/* {isFront == "notFront" && (
-        <Breadcrumbs
-          items={[
-            {
-              title: node.title,
-            },
-          ]}
-        />
-      )} */}
-      <article className="bg-white border text-text p-9 border-border">
-        <h1 className="font-serif text-2xl leading-tight lg:text-4xl">
+    <article className="rounded border border-deep-fir-900 bg-deep-fir-950 p-3">
+      <header>
+        <h1 className="font-bebas-neue text-3xl tracking-wide text-deep-fir-100 md:text-4xl mb-2">
           {node.title}
         </h1>
-        <div className="mt-4 prose prose-a:text-link max-w-none text-text">
-          {node.body?.processed && <FormattedText text={node.body.processed} />}
-        </div>
-        {node.field_page_images?.length ? (
-          <div>
-            <MediaImages media={node.field_page_images} teaser={false} />
-          </div>
-        ) : null}
-      </article>
-    </div>
+      </header>
+      <section className="text-white prose-headings:font-bebas-neue prose-headings:text-deep-fir-100 prose-headings:tracking-wide
+        prose-p:text-base prose-p:mb-2 prose-a:text-deep-fir-400
+        prose-a:transition-all prose-a:underline prose-a:underline-offset-2 hover:prose-a:underline-offset-4">
+        {node.body?.processed && <FormattedText text={node.body.processed} />}
+      </section>
+      {node.field_page_images?.length ? (
+        <section className="mt-6">
+          <MediaImages media={node.field_page_images} teaser={false} />
+        </section>
+      ) : null}
+    </article>
   )
 }
