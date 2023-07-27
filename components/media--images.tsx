@@ -27,17 +27,16 @@ export function MediaImages({
   // Need to change it to the [[...slug]].tsx page
   // Get all the images.
   return (
-    <div>
-    {images.map((image) => (
-      <div key={image.id} className="media__content image__wrapper" {...props}>
+    images.map((image) => (
+      <div key={image.id} className="media__content image__wrapper border border-white relative" {...props}>
         <Image
           src={absoluteURL(image.field_media_image.uri.url)}
           alt={image.field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}
           width={500}
           height={500}
+          style={{objectFit:"cover"}}
         />
       </div>
-    ))}
-    </div>
+    ))
   )
 }

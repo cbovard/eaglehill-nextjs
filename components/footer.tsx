@@ -14,28 +14,28 @@ export interface FooterProps {
 
 export function Footer({ menus, blocks }: FooterProps) {
   return (
-    <footer className="xl:container xl:mx-auto bg-grass-pattern bg-repeat-x bg-bottom">
-      <section className="py-8 text-white bg-gray-darker">
-        <div className="container justify-between lg:grid lg:grid-cols-[6fr_1.5fr_2.5fr]">
+    <footer className="w-full bg-grass-pattern bg-repeat-x bg-bottom">
+      <div className="xl:container xl:mx-auto px-5">
+        <div className="bg-[#26262680] px-4">
           {blocks?.newsBlock && (
             <div className="text-left">
-              <h4 className="text-black uppercase font-semibold">Latest News</h4>
+              <h4 className="text-white uppercase font-semibold">Latest News</h4>
               {blocks.newsBlock.map((news_node) => (
                 <article key={news_node.id}>
                   <h5 className="flex-1 text-2xl">
                     <Link href={news_node.path.alias}
-                      className="hover:underline text-black text-link"
+                      className="hover:underline text-white text-link"
                       passHref>
                       {news_node.title}
                     </Link>
                   </h5>
                   {news_node.body.processed && (
                     <section>
-                      <p className="text-black">{news_node.body?.processed && <TeaserText text={news_node.body.processed} maxLength={110} />}</p>
+                      <p className="text-white">{news_node.body?.processed && <TeaserText text={news_node.body.processed} maxLength={110} />}</p>
                     </section>
                   )}
                   <Link href={news_node.path.alias}
-                    className="hover:underline text-black text-link"
+                    className="hover:underline text-white text-link"
                     passHref>
                     more
                   </Link>
@@ -44,15 +44,13 @@ export function Footer({ menus, blocks }: FooterProps) {
             </div>
           )}
           {menus?.footer?.length ? (
-            <div className="pt-10 text-center lg:text-left lg:col-start-3">
+            <div className="pt-10">
               <MenuFooter items={menus.footer} />
             </div>
           ) : null}
+          <h6 className="text-white">&copy; {new Date().getFullYear()} Eagle Hill Equine</h6>
         </div>
-      </section>
-      <p>
-        © {new Date().getFullYear()} Eagle Hill Equine
-      </p>
+      </div>
     </footer>
   )
 }
