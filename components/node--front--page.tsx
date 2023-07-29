@@ -10,7 +10,7 @@ export function NodeFrontPage({ node }: NodeFrontPageProps) {
   return (
     <article className="rounded border border-deep-fir-900 bg-deep-fir-950 p-4">
       <header>
-        <h1 className="font-bebas-neue text-3xl tracking-wide text-deep-fir-100 md:text-4xl mb-2">
+        <h1 className="font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl mb-2">
           {node.title}
         </h1>
       </header>

@@ -28,7 +28,7 @@ export function MediaImages({
   // Get all the images.
   return (
     images.map((image) => (
-      <div key={image.id} className="media__content image__wrapper border border-white relative" {...props}>
+      <div key={image.id} className="media__content image__wrapper relative overflow-hidden max-h-[5.813rem] max-w-[8.75rem] border border-white" {...props}>
         <Image
           src={absoluteURL(image.field_media_image.uri.url)}
           alt={image.field_media_image.resourceIdObjMeta.alt || "Eagle Hill Equine"}

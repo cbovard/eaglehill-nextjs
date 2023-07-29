@@ -8,13 +8,13 @@ interface MenuFooterProps {
 export function MenuFooter({ items, ...props }: MenuFooterProps) {
   return (
     <nav {...props}>
-      <ul className="flex flex-col space-y-2">
+      <ul className="flex flex-col space-y-1">
         {items.map((item) => (
           <li key={item.id}>
             <Link
               href={item.url}
               passHref
-              className="text-sm font-semibold transition-colors text-gray-600 hover:bg-black hover:underline">
+              className="text-base text-white transition-all underline underline-offset-2 hover:underline-offset-4">
               {item.title}
             </Link>
           </li>
