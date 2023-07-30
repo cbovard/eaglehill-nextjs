@@ -20,7 +20,7 @@ export function NodeFrontPage({ node }: NodeFrontPageProps) {
         {node.body?.processed && <FormattedText text={node.body.processed} />}
       </section>
       {node.field_page_images?.length ? (
-        <section className="grid grid-cols-2 gap-4 mg:grid-cols-3 md:gap-3 lg:grid-cols-4 xl:grid-cols-8">
+        <section className="flex flex-row flex-wrap justify-center gap-2">
           <MediaImages media={node.field_page_images} teaser={false} />
         </section>
       ) : null}
