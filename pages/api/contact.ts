@@ -1,20 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next"
-import { drupal } from "lib/drupal"
+import { NextApiRequest, NextApiResponse } from "next";
+import { drupal } from "lib/drupal";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
     // Only accept POST requests.
     if (req.method !== "POST") {
-      return res.status(405).end()
+      return res.status(405).end();
     }
 
     if (req.method === "POST") {
       // The body field will contain the form values.
       // You can make a request to your site with these values.
-      const body = JSON.parse(req.body)
+      const body = JSON.parse(req.body);
 
       // Format the payload for /webform_rest/submit
       const payload = {
@@ -23,7 +23,7 @@ export default async function handler(
         email: body.email,
         subject: body.subject,
         message: body.message,
-      }
+      };
 
       // Send the payload to Drupal.
       // Ensure you have the /webform_rest/submit resource enabled.
@@ -35,21 +35,19 @@ export default async function handler(
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
-        }
-      )
+        },
+      );
 
       // An error occured on Drupal.
       // Here you can throw error, or send back the response json with the error.
       if (!response.ok) {
-        throw new Error()
+        throw new Error();
       }
 
       // The form has been submitted. Return success 200.
-      res.end()
+      res.end();
     }
   } catch (error) {
-    return res.status(500).end(error)
+    return res.status(500).end(error);
   }
 }
-
-

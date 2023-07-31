@@ -1,18 +1,18 @@
-import { GetStaticPathsResult, GetStaticPropsResult } from "next"
-import { getGlobalElements } from "lib/get-global-elements"
-import { Layout, LayoutProps } from "components/layout"
-import { Pager, PagerProps } from "components/pager"
-import { getCustomDrupalView } from "lib/utils"
-import { PageHeader } from "components/page-header"
-import { Node } from "components/node"
+import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { getGlobalElements } from "lib/get-global-elements";
+import { Layout, LayoutProps } from "components/layout";
+import { Pager, PagerProps } from "components/pager";
+import { getCustomDrupalView } from "lib/utils";
+import { PageHeader } from "components/page-header";
+import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
 
-export const NUMBER_OF_POSTS_PER_PAGE = 10
+export const NUMBER_OF_POSTS_PER_PAGE = 10;
 
 export interface MaresPageProps extends LayoutProps {
-  page: Pick<PagerProps, "current" | "total">
-  nodes: any
+  page: Pick<PagerProps, "current" | "total">;
+  nodes: any;
 }
 
 export default function MaresPage({
@@ -21,9 +21,8 @@ export default function MaresPage({
   page,
   nodes,
 }: MaresPageProps) {
-
   // If there is only one page of nodes.
-  const pageCount = (page.total > 1) ? true : false;
+  const pageCount = page.total > 1 ? true : false;
 
   return (
     <Layout meta={{ title: "Mares" }} menus={menus} blocks={blocks}>
@@ -35,7 +34,7 @@ export default function MaresPage({
           },
         ]}
       />
-      <div className="container max-w-6xl px-6 pt-10 mx-auto md:py-20">
+      <div className="container mx-auto max-w-6xl px-6 pt-10 md:py-20">
         {nodes.results.length ? (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {nodes.results.map((maresNode) => (
@@ -50,12 +49,12 @@ export default function MaresPage({
             current={page.current}
             total={page.total}
             href={(page) => (page === 0 ? `/mares` : `/mares/page/${page}`)}
-            className="py-8 mt-8"
+            className="mt-8 py-8"
           />
         ) : null}
       </div>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
@@ -66,31 +65,30 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
       params: {
         page: `${page + 1}`,
       },
-    }))
+    }));
 
   return {
     paths,
     fallback: "blocking",
-  }
+  };
 }
 
 export async function getStaticProps(
-  context
+  context,
 ): Promise<GetStaticPropsResult<MaresPageProps>> {
-
   // For the main mares page this will be 0.
-  const current = parseInt(context.params.page)
+  const current = parseInt(context.params.page);
 
-  let params = '?include=field_livestock_images.field_media_image'
+  let params = "?include=field_livestock_images.field_media_image";
   // If this is not 1st page.
-  if (current != 0){
-    params = params + `&page=${current}`
+  if (current != 0) {
+    params = params + `&page=${current}`;
   }
 
   const nodes = await getCustomDrupalView("livestock--page_mares", {
     params: params,
     current: current,
-  })
+  });
 
   return {
     props: {
@@ -101,5 +99,5 @@ export async function getStaticProps(
         total: Math.ceil(nodes.meta.count / NUMBER_OF_POSTS_PER_PAGE),
       },
     },
-  }
+  };
 }

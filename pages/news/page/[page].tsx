@@ -1,18 +1,18 @@
-import { GetStaticPathsResult, GetStaticPropsResult } from "next"
-import { getGlobalElements } from "lib/get-global-elements"
-import { Layout, LayoutProps } from "components/layout"
-import { Pager, PagerProps } from "components/pager"
-import { getCustomDrupalView } from "lib/utils"
-import { PageHeader } from "components/page-header"
-import { Node } from "components/node"
+import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { getGlobalElements } from "lib/get-global-elements";
+import { Layout, LayoutProps } from "components/layout";
+import { Pager, PagerProps } from "components/pager";
+import { getCustomDrupalView } from "lib/utils";
+import { PageHeader } from "components/page-header";
+import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
 
-export const NUMBER_OF_POSTS_PER_PAGE = 10
+export const NUMBER_OF_POSTS_PER_PAGE = 10;
 
 export interface NewsPageProps extends LayoutProps {
-  page: Pick<PagerProps, "current" | "total">
-  nodes: any
+  page: Pick<PagerProps, "current" | "total">;
+  nodes: any;
 }
 
 export default function NewsPage({
@@ -21,9 +21,8 @@ export default function NewsPage({
   page,
   nodes,
 }: NewsPageProps) {
-
   // If there is only one page of nodes.
-  const pageCount = (page.total > 1) ? true : false;
+  const pageCount = page.total > 1 ? true : false;
 
   return (
     <Layout meta={{ title: "News" }} menus={menus} blocks={blocks}>
@@ -50,12 +49,12 @@ export default function NewsPage({
             current={page.current}
             total={page.total}
             href={(page) => (page === 0 ? `/news` : `/news/page/${page}`)}
-            className="py-8 mt-8"
+            className="mt-8 py-8"
           />
         ) : null}
       </div>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
@@ -66,32 +65,30 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
       params: {
         page: `${page + 1}`,
       },
-    }))
+    }));
 
   return {
     paths,
     fallback: "blocking",
-  }
+  };
 }
 
 export async function getStaticProps(
-  context
+  context,
 ): Promise<GetStaticPropsResult<NewsPageProps>> {
-
   // For the main news page this will be 0.
-  const current = parseInt(context.params.page)
+  const current = parseInt(context.params.page);
 
-  let params = '?include=field_news_images.field_media_image'
+  let params = "?include=field_news_images.field_media_image";
   // If this is not 1st page.
-  if (current != 0){
-    params = params + `&page=${current}`
+  if (current != 0) {
+    params = params + `&page=${current}`;
   }
 
   const nodes = await getCustomDrupalView("news--page_news_1", {
     params: params,
     current: current,
-  })
-
+  });
 
   return {
     props: {
@@ -102,5 +99,5 @@ export async function getStaticProps(
         total: Math.ceil(nodes.meta.count / NUMBER_OF_POSTS_PER_PAGE),
       },
     },
-  }
+  };
 }

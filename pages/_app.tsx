@@ -1,14 +1,14 @@
-import { AppProps } from "next/app"
-import { Bebas_Neue } from "next/font/google"
+import { AppProps } from "next/app";
+import { Bebas_Neue } from "next/font/google";
 
-import "styles/globals.css"
+import "styles/globals.css";
 
 const bebasNeue = Bebas_Neue({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-bebas-neue',
-})
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bebas-neue",
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -20,5 +20,5 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
       <Component {...pageProps} />
     </>
-  )
+  );
 }

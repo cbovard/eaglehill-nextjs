@@ -48,8 +48,8 @@ const nextConfig = {
         source: "/livestock",
         destination: "/livestock/page/0",
       },
-    ]
+    ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
