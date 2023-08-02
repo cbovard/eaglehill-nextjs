@@ -3,7 +3,7 @@ import { getGlobalElements } from "lib/get-global-elements";
 import { Layout, LayoutProps } from "components/layout";
 import { Pager, PagerProps } from "components/pager";
 import { getCustomDrupalView } from "lib/utils";
-import { PageHeader } from "components/page-header";
+// import { PageHeader } from "components/page-header";
 import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
@@ -26,32 +26,41 @@ export default function NewsPage({
 
   return (
     <Layout meta={{ title: "News" }} menus={menus} blocks={blocks}>
-      <PageHeader
+      {/* <PageHeader
         heading="News"
         breadcrumbs={[
           {
             title: "News",
           },
         ]}
-      />
-      <div className="container">
-        {nodes.results.length ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {nodes.results.map((newsNode) => (
-              <Node viewMode="teaser" key={newsNode.id} node={newsNode} />
-            ))}
-          </div>
-        ) : (
-          <p className="py-6">No posts found</p>
-        )}
-        {pageCount ? (
-          <Pager
-            current={page.current}
-            total={page.total}
-            href={(page) => (page === 0 ? `/news` : `/news/page/${page}`)}
-            className="mt-8 py-8"
-          />
-        ) : null}
+      /> */}
+      <div className="lg:h-60 lg:px-5">
+        <div className="outline outline-1 outline-orange-100 lg:h-60"></div>
+      </div>
+      <div className="p-5">
+        <div>
+          <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 sm:text-left md:text-4xl">
+            News
+          </h1>
+          {nodes.results.length ? (
+            <div className="flex flex-col justify-center gap-6 sm:justify-normal">
+              {nodes.results.map((newsNode) => (
+                <Node viewMode="teaser" key={newsNode.id} node={newsNode} />
+              ))}
+            </div>
+          ) : (
+            <p className="py-6">No News Articles found.</p>
+          )}
+          {pageCount ? (
+            <Pager
+              current={page.current}
+              total={page.total}
+              href={(page) => (page === 0 ? `/news` : `/news/page/${page}`)}
+              className="mt-8 py-8"
+            />
+          ) : null}
+        </div>
+        <aside className="hidden"></aside>
       </div>
     </Layout>
   );

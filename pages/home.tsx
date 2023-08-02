@@ -24,7 +24,7 @@ export default function IndexPage({ menus, node, blocks }: IndexPageProps) {
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <div className="lg:h-60 lg:px-5">
-        <div className="lg:h-60 lg:outline lg:outline-1 lg:outline-orange-100">
+        <div className="outline outline-1 outline-orange-100 lg:h-60">
           {/* <Carousel images={images} /> */}
         </div>
       </div>

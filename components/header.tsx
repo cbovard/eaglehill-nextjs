@@ -21,12 +21,15 @@ export function Header({ menus }: HeaderProps) {
   const [showMenu, setShowMenu] = React.useState<Boolean>(false);
 
   return (
-    <header className="lg:flex lg:flex-col lg:justify-between lg:relative lg:h-[14rem] xl:container xl:mx-auto p-5 md:py-0">
+    <header
+      role="banner"
+      className="p-5 xl:container md:py-0 lg:relative lg:flex lg:h-[14rem] lg:flex-col lg:justify-between xl:mx-auto"
+    >
       <div className="hidden lg:flex lg:justify-end lg:pt-5">
         <MenuQuickLinks items={menus.quickLinks} />
       </div>
       <div className="w-full lg:absolute lg:left-5 lg:top-4 lg:w-[325px]">
-        <div className="max-w-[70%] sm:max-w-[325px] mx-auto pt-3">
+        <div className="mx-auto max-w-[70%] pt-3 sm:max-w-[325px]">
           <Link href="/" passHref>
             <Image
               src={logoImage}
@@ -42,15 +45,15 @@ export function Header({ menus }: HeaderProps) {
         </div>
       </div>
       <button
-        className="absolute right-5 top-8 w-8 h-8 md:hidden border border-transparent  text-white focus:outline-none bg-transparent"
+        className="absolute right-5 top-8 h-8 w-8 border border-transparent bg-transparent  text-white focus:outline-none md:hidden"
         onClick={() => setShowMenu(!showMenu)}
       >
         <span className="sr-only">Open main menu</span>
-        <span className="block w-7 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <span className="absolute left-1/2 top-1/2 block w-7 -translate-x-1/2 -translate-y-1/2 transform">
           <span
             aria-hidden="true"
             className={classNames(
-              "block absolute h-[0.1875rem] w-7 bg-current transform transition duration-500 ease-in-out",
+              "absolute block h-[0.1875rem] w-7 transform bg-current transition duration-500 ease-in-out",
               {
                 "rotate-45": showMenu,
                 "-translate-y-[0.475rem]": !showMenu,
@@ -60,7 +63,7 @@ export function Header({ menus }: HeaderProps) {
           <span
             aria-hidden="true"
             className={classNames(
-              "block absolute h-[0.1875rem] w-7 bg-current transform transition duration-500 ease-in-out",
+              "absolute block h-[0.1875rem] w-7 transform bg-current transition duration-500 ease-in-out",
               {
                 "opacity-0": showMenu,
               },
@@ -69,7 +72,7 @@ export function Header({ menus }: HeaderProps) {
           <span
             aria-hidden="true"
             className={classNames(
-              "block absolute h-[0.1875rem] w-7 bg-current transform transition duration-500 ease-in-out",
+              "absolute block h-[0.1875rem] w-7 transform bg-current transition duration-500 ease-in-out",
               {
                 "-rotate-45": showMenu,
                 "translate-y-[0.475rem]": !showMenu,
@@ -80,7 +83,7 @@ export function Header({ menus }: HeaderProps) {
       </button>
       <div
         className={classNames(
-          "max-h-0 overflow-hidden md:max-h-screen lg:h-[52px] transition-all md:transition-none",
+          "max-h-0 overflow-hidden transition-all md:max-h-screen md:transition-none lg:h-[52px]",
           {
             "max-h-screen": showMenu,
           },

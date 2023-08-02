@@ -14,7 +14,10 @@ export interface FooterProps {
 
 export function Footer({ menus, blocks }: FooterProps) {
   return (
-    <footer className="w-full bg-grass-pattern bg-bottom bg-repeat-x">
+    <footer
+      role="contentinfo"
+      className="w-full bg-grass-pattern bg-bottom bg-repeat-x"
+    >
       <div className="px-5 xl:container xl:mx-auto">
         <div className="bg-[#26262680] p-4 md:py-5 xl:p-8">
           <div className="md:flex md:justify-between md:gap-8">
@@ -105,9 +108,9 @@ export function Footer({ menus, blocks }: FooterProps) {
                 </li>
               </ul>
             </div>
-            <h6 className="mt-3 text-xs font-semibold text-gray-400 md:m-0 md:text-sm">
+            <p className="mt-3 text-xs font-semibold text-gray-400 md:m-0 md:text-sm">
               &copy; {new Date().getFullYear()} Eagle Hill Equine
-            </h6>
+            </p>
           </div>
         </div>
       </div>
