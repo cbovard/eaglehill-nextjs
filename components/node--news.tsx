@@ -45,11 +45,10 @@ export function NodeNewsTeaser({ node, ...props }) {
     <article
       data-cy="node--news"
       {...props}
-      className="m-auto max-w-xs rounded-lg bg-deep-fir-950 p-4 text-center drop-shadow-white-1 sm:relative sm:m-0 sm:flex
-      sm:max-w-none sm:flex-row sm:gap-2 sm:text-left"
+      className="m-auto max-w-xs rounded-lg bg-deep-fir-950 p-4 text-center drop-shadow-white-1 md:m-0 lg:max-w-[18rem]"
     >
       {node.field_news_images[0].field_media_image?.uri && (
-        <div className="mb-4 w-80 sm:mb-0">
+        <div className="mb-6">
           <Link href={node.path.alias} passHref>
             <Image
               src={
@@ -67,30 +66,26 @@ export function NodeNewsTeaser({ node, ...props }) {
           </Link>
         </div>
       )}
-      <div>
-        <h2 className="mb-1 font-bebas-neue text-2xl text-deep-fir-100">
-          <Link
-            href={node.path.alias}
-            className="transition-all duration-200 hover:underline"
-            passHref
-          >
-            {node.title}
-          </Link>
-        </h2>
-        {node.body.processed && (
-          <section>
-            <p className="mb-5 text-sm text-white">
-              {node.body?.processed && (
-                <TeaserText text={node.body.processed} />
-              )}
-            </p>
-          </section>
-        )}
-      </div>
+      <h2 className="mb-3 font-bebas-neue text-2xl text-deep-fir-100">
+        <Link
+          href={node.path.alias}
+          className="transition-all duration-200 hover:underline"
+          passHref
+        >
+          {node.title}
+        </Link>
+      </h2>
+      {node.body.processed && (
+        <section>
+          <p className="mb-6 text-base text-white">
+            {node.body?.processed && <TeaserText text={node.body.processed} />}
+          </p>
+        </section>
+      )}
       <Link
         href={node.path.alias}
-        className="absolute bottom-0 right-0 inline-block rounded-md bg-gradient-to-b from-deep-fir-700 to-deep-fir-800
-        p-2 text-xs text-white transition-all
+        className="mb-2 inline-block rounded-md bg-gradient-to-b from-deep-fir-700 to-deep-fir-800 p-2
+        text-xs font-bold text-white transition-all
         duration-200 hover:from-deep-fir-800 hover:to-deep-fir-700"
         passHref
       >

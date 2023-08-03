@@ -1,13 +1,10 @@
-import classNames from "classnames"
-
-import { usePagination, usePaginationProps } from "lib/use-pagination"
-import Link from "next/link"
-import { PagerItem } from "./pager-item"
+import { usePagination, usePaginationProps } from "lib/use-pagination";
+import { PagerItem } from "./pager-item";
 
 export interface PagerProps extends React.HTMLAttributes<HTMLElement> {
-  current: number
-  total: number
-  href: usePaginationProps["href"]
+  current: number;
+  total: number;
+  href: usePaginationProps["href"];
 }
 
 export function Pager({ current, total, href, ...props }: PagerProps) {
@@ -15,12 +12,12 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
     current,
     total,
     href,
-  })
+  });
 
   return (
     <nav role="navigation" aria-labelledby="pagination-heading" {...props}>
       <h4 className="sr-only">Pagination</h4>
-      <ul className="flex items-center justify-center w-auto">
+      <ul className="inline-flex gap-x-3 text-sm">
         {items.map((link, index) => (
           <li key={index}>
             <PagerItem link={link} />
@@ -28,5 +25,5 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
         ))}
       </ul>
     </nav>
-  )
+  );
 }

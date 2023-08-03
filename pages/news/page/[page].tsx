@@ -38,12 +38,12 @@ export default function NewsPage({
         <div className="outline outline-1 outline-orange-100 lg:h-60"></div>
       </div>
       <div className="p-5">
-        <div>
-          <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 sm:text-left md:text-4xl">
+        <div className="pt-5">
+          <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:text-5xl">
             News
           </h1>
           {nodes.results.length ? (
-            <div className="flex flex-col justify-center gap-6 sm:justify-normal">
+            <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:content-stretch md:justify-center">
               {nodes.results.map((newsNode) => (
                 <Node viewMode="teaser" key={newsNode.id} node={newsNode} />
               ))}
@@ -56,7 +56,7 @@ export default function NewsPage({
               current={page.current}
               total={page.total}
               href={(page) => (page === 0 ? `/news` : `/news/page/${page}`)}
-              className="mt-8 py-8"
+              className="mt-8 flex justify-center py-8"
             />
           ) : null}
         </div>
