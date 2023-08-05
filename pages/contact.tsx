@@ -7,13 +7,14 @@ import { FormContact } from "components/form--contact";
 
 interface ContactPageProps extends LayoutProps {}
 
-export default function ContactPage({ menus }: ContactPageProps) {
+export default function ContactPage({ menus, blocks }: ContactPageProps) {
   return (
     <Layout
       meta={{
         title: "Contact Us",
       }}
       menus={menus}
+      blocks={blocks}
     >
       <PageHeader
         heading={"Contact Us"}
