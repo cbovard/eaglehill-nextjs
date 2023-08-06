@@ -45,6 +45,9 @@ export function NodeLivestockFull({ node, ...props }) {
 }
 
 export function NodeLivestockTeaser({ node, ...props }) {
+  //console.log(node.title);
+  //console.log(node.body);
+
   return (
     <article
       {...props}
