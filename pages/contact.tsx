@@ -9,25 +9,28 @@ interface ContactPageProps extends LayoutProps {}
 
 export default function ContactPage({ menus, blocks }: ContactPageProps) {
   return (
-    <Layout
-      meta={{
-        title: "Contact Us",
-      }}
-      menus={menus}
-      blocks={blocks}
-    >
-      <PageHeader
+    <Layout meta={{ title: "Contact Us" }} menus={menus} blocks={blocks}>
+      {/* <PageHeader
         heading={"Contact Us"}
         breadcrumbs={[
           {
             title: "Contact Us",
           },
         ]}
-      />
-      <div className="container">
-        <div className="mx-auto max-w-xl pb-8">
+      /> */}
+      <div className="lg:h-60 lg:px-5">
+        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
+          <p className="text-white">Slider here soon</p>
+        </div>
+      </div>
+      <div className="g:grid-rows-1 p-5 lg:grid lg:grid-cols-12 lg:gap-6">
+        <div className="pt-5 lg:col-span-9">
           <FormContact />
         </div>
+        <aside className="hidden lg:col-span-3 lg:block">
+          <h2 className="text-white">Sidebar on larger</h2>
+          <p className="text-white">Going to add the Sidebar fun soon</p>
+        </aside>
       </div>
     </Layout>
   );

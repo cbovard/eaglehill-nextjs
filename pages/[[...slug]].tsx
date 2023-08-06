@@ -21,7 +21,20 @@ interface NodePageProps extends LayoutProps {
 export default function NodePage({ menus, blocks, node }: NodePageProps) {
   return (
     <Layout meta={{ title: node.title }} menus={menus} blocks={blocks}>
-      <Node node={node} />
+      <div className="lg:h-60 lg:px-5">
+        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
+          <p className="text-white">Slider here soon</p>
+        </div>
+      </div>
+      <div className="g:grid-rows-1 p-5 lg:grid lg:grid-cols-12 lg:gap-6">
+        <div className="pt-5 lg:col-span-9">
+          <Node node={node} />
+        </div>
+        <aside className="hidden lg:col-span-3 lg:block">
+          <h2 className="text-white">Sidebar on larger</h2>
+          <p className="text-white">Going to add the Sidebar fun soon</p>
+        </aside>
+      </div>
     </Layout>
   );
 }

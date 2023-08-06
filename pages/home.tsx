@@ -1,13 +1,12 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { DrupalBlock, DrupalNode } from "next-drupal";
-import classNames from "classnames";
-
+// import classNames from "classnames";
 import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
-import { getParams } from "lib/get-params";
+// import { getParams } from "lib/get-params";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { Layout, LayoutProps } from "components/layout";
-import Carousel from "components/carousel";
+// import Carousel from "components/carousel";
 import { NodeFrontPage } from "components/node--front--page";
 
 interface IndexPageProps extends LayoutProps {
@@ -24,8 +23,8 @@ export default function IndexPage({ menus, node, blocks }: IndexPageProps) {
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <div className="lg:h-60 lg:px-5">
-        <div className="outline outline-1 outline-orange-100 lg:h-60">
-          {/* <Carousel images={images} /> */}
+        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
+          <p className="text-white">Slider here soon</p>
         </div>
       </div>
       <div className="p-5">

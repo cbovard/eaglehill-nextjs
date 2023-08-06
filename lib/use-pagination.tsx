@@ -22,7 +22,7 @@ export const usePagination = ({
   total,
   current,
   href,
-  show = 9,
+  show = 4,
 }: usePaginationProps): PagerItem[] => {
   return React.useMemo<PagerItem[]>((): PagerItem[] => {
     const pagerMiddle = Math.ceil(show / 2);

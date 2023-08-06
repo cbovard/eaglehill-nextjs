@@ -3,7 +3,7 @@ import { getGlobalElements } from "lib/get-global-elements";
 import { Layout, LayoutProps } from "components/layout";
 import { Pager, PagerProps } from "components/pager";
 import { getCustomDrupalView } from "lib/utils";
-import { PageHeader } from "components/page-header";
+// import { PageHeader } from "components/page-header";
 import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
@@ -29,38 +29,54 @@ export default function StallionsPage({
 
   return (
     <Layout meta={{ title: "Stallions" }} menus={menus} blocks={blocks}>
-      <PageHeader
+      {/* <PageHeader
         heading="Stallions"
         breadcrumbs={[
           {
             title: "Stallions",
           },
         ]}
-      />
-      <div className="container mx-auto max-w-6xl px-6 pt-10 md:py-20">
-        {nodes.results.length ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {nodes.results.map((stallionsNode) => (
-              <Node
-                viewMode="teaser"
-                key={stallionsNode.id}
-                node={stallionsNode}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="py-6">No posts found</p>
-        )}
-        {pageCount ? (
-          <Pager
-            current={page.current}
-            total={page.total}
-            href={(page) =>
-              page === 0 ? `/stallions` : `/stallions/page/${page}`
-            }
-            className="mt-8 py-8"
-          />
-        ) : null}
+      /> */}
+      <div className="lg:h-60 lg:px-5">
+        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
+          <p className="text-white">Slider here soon</p>
+        </div>
+      </div>
+      <div className="p-5 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-6">
+        <div className="pt-5 lg:col-span-9">
+          <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:pl-5 lg:text-left lg:text-5xl">
+            Stallions
+          </h1>
+          {nodes.results.length ? (
+            <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:content-stretch md:justify-center">
+              {nodes.results.map((stallionsNode) => (
+                <Node
+                  viewMode="teaser"
+                  key={stallionsNode.id}
+                  node={stallionsNode}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="py-6 text-4xl text-white">No Stallions found.</p>
+          )}
+          {pageCount ? (
+            <Pager
+              current={page.current}
+              total={page.total}
+              href={(page) =>
+                page === 0 ? `/stallions` : `/stallions/page/${page}`
+              }
+              className="mt-8 flex justify-center py-8"
+            />
+          ) : (
+            <div className="mt-8"></div>
+          )}
+        </div>
+        <aside className="hidden lg:col-span-3 lg:block">
+          <h2 className="text-white">Sidebar on larger</h2>
+          <p className="text-white">Going to add the Sidebar fun soon</p>
+        </aside>
       </div>
     </Layout>
   );
