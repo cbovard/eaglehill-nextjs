@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { absoluteURL } from "lib/utils";
 
 import { NodeProps } from "components/node";
 import { MediaImages } from "components/media--images";
@@ -45,13 +46,10 @@ export function NodeLivestockFull({ node, ...props }) {
 }
 
 export function NodeLivestockTeaser({ node, ...props }) {
-  //console.log(node.title);
-  //console.log(node.body);
-
   return (
     <article
       {...props}
-      className="m-auto max-w-xs rounded-lg bg-deep-fir-950 p-4 text-center drop-shadow-white-1 md:m-0 lg:max-w-[18rem]"
+      className="m-auto max-w-[17rem] rounded-lg bg-deep-fir-950 p-4 text-center drop-shadow-white-1 md:m-0 lg:max-w-[18rem]"
     >
       {node.field_livestock_images[0].field_media_image?.uri && (
         <div className="mb-6">
@@ -59,14 +57,21 @@ export function NodeLivestockTeaser({ node, ...props }) {
             <Image
               src={
                 node.field_livestock_images[0].field_media_image.image_style_uri
-                  .image_164x111
+                  .image_800x600_webp
               }
               alt={
                 node.field_livestock_images[0].field_media_image
                   .resourceIdObjMeta.alt || "Eagle Hill Equine"
               }
-              width={164}
-              height={111}
+              width={800}
+              height={600}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              quality={80}
+              placeholder="blur"
+              blurDataURL={
+                node.field_livestock_images[0].field_media_image.image_style_uri
+                  .image_800x600_webp
+              }
               className="h-auto w-full overflow-hidden rounded-lg transition-all duration-300 hover:opacity-70"
             />
           </Link>

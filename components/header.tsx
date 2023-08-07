@@ -4,7 +4,6 @@ import { DrupalMenuLinkContent } from "next-drupal";
 import classNames from "classnames";
 
 import siteConfig from "site.config";
-// import { Logo } from "components/logo"
 import Image from "next/image";
 import logoImage from "../public/images/logo.png";
 import { MenuMain } from "components/menu-main";

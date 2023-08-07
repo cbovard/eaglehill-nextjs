@@ -8,7 +8,8 @@ import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
 
-export const NUMBER_OF_POSTS_PER_PAGE = 10;
+// Need to move to global.
+export const NUMBER_OF_POSTS_PER_PAGE = 6;
 
 export interface LivestockPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">;
