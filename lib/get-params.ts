@@ -1,13 +1,13 @@
-import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 
 // A helper function to build params for a resource type.
 export function getParams(
   name: string,
-  mode: string = null
+  mode: string = null,
 ): DrupalJsonApiParams {
-  const params = new DrupalJsonApiParams()
+  const params = new DrupalJsonApiParams();
 
-  name = mode ? `${name}--${mode}` : name
+  name = mode ? `${name}--${mode}` : name;
 
   if (name === "node--page") {
     return params
@@ -15,7 +15,7 @@ export function getParams(
       .addInclude(["field_page_images.field_media_image"])
       .addFields("node--page", ["title", "body", "status", "field_page_images"])
       .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta", "image_style_uri"]);
   }
 
   if (name === "node--news") {
@@ -24,29 +24,31 @@ export function getParams(
       .addInclude(["field_news_images.field_media_image"])
       .addFields("node--news", ["title", "body", "status", "field_news_images"])
       .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta", "image_style_uri"]);
   }
 
   if (name === "node--livestock") {
     return params
       .addFilter("status", "1")
       .addInclude(["field_livestock_images.field_media_image"])
-      .addFields("node--livestock", ["title", "body", "status", "field_livestock_images", "field_price_fee"])
+      .addFields("node--livestock", [
+        "title",
+        "body",
+        "status",
+        "field_livestock_images",
+        "field_price_fee",
+      ])
       .addFields("media--image", ["field_media_image"])
-      .addFields("file--file", ["uri", "resourceIdObjMeta"])
+      .addFields("file--file", ["uri", "resourceIdObjMeta", "image_style_uri"]);
   }
 
   if (name === "block_content--news_block") {
-    return params.addFields("node--news", [
-      "title",
-      "body",
-      "path"
-    ])
+    return params.addFields("node--news", ["title", "body", "path"]);
   }
 
   if (name === "menu_link_content--menu_link_content") {
     return params.addFields("menu_link_content--menu_link_content", [
       "title,url",
-    ])
+    ]);
   }
 }

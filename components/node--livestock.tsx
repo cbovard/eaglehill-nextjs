@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { absoluteURL } from "lib/utils";
-
 import { NodeProps } from "components/node";
 import { MediaImages } from "components/media--images";
 import { FormattedText, TeaserText } from "./formatted-text";

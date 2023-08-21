@@ -36,7 +36,7 @@ export function NodeNewsFull({ node, ...props }) {
         {node.body?.processed && <FormattedText text={node.body.processed} />}
       </section>
       {node.field_news_images?.length ? (
-        <section className="flex flex-row flex-wrap justify-center gap-2">
+        <section className="grid grid-cols-2 gap-4 md:grid-cols-3">
           <MediaImages media={node.field_news_images} teaser={false} />
         </section>
       ) : null}
