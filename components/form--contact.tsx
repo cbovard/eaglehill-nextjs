@@ -94,7 +94,7 @@ export function FormContact({ className, ...props }: FormContactProps) {
               value={name}
               onChange={(event) => setName(event.target.value)}
               required
-              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 focus:outline-dotted focus:outline-offset-2 focus:ring-0"
+              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 text-black focus:outline-dotted focus:outline-offset-2 focus:ring-0"
             />
           </div>
           <div className="grid gap-2">
@@ -110,7 +110,7 @@ export function FormContact({ className, ...props }: FormContactProps) {
               onChange={(event) => setEmail(event.target.value)}
               maxLength={255}
               required
-              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 focus:outline-dotted focus:outline-offset-2 focus:ring-0"
+              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 text-black focus:outline-dotted focus:outline-offset-2 focus:ring-0"
             />
           </div>
           <div className="hidden">
@@ -125,7 +125,7 @@ export function FormContact({ className, ...props }: FormContactProps) {
               value={secondEmail}
               onChange={(event) => setEmail2(event.target.value)}
               maxLength={255}
-              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 focus:outline-dotted focus:outline-offset-2 focus:ring-0"
+              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 text-black focus:outline-dotted focus:outline-offset-2 focus:ring-0"
             />
           </div>
           <div className="grid gap-2">
@@ -139,7 +139,7 @@ export function FormContact({ className, ...props }: FormContactProps) {
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
               required
-              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 focus:outline-dotted focus:outline-offset-2"
+              className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 text-black focus:outline-dotted focus:outline-offset-2"
             />
           </div>
           <div className="grid gap-2">
@@ -152,7 +152,7 @@ export function FormContact({ className, ...props }: FormContactProps) {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               required
-              className="border-gray focus:border-gray focus:outline-link h-48 border-2 px-2 py-3 focus:outline-dotted focus:outline-offset-2 focus:ring-0"
+              className="border-gray focus:border-gray focus:outline-link h-48 border-2 px-2 py-3 text-black focus:outline-dotted focus:outline-offset-2 focus:ring-0"
             ></textarea>
           </div>
           <div>

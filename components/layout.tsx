@@ -14,7 +14,7 @@ export function Layout({ meta, menus, children, blocks }: LayoutProps) {
     <>
       <Meta {...meta} />
       <Header menus={{ main: menus.main, quickLinks: menus.quickLinks }} />
-      <main role="main" className="xl:container xl:mx-auto">
+      <main role="main" className="relative z-0 xl:container xl:mx-auto">
         {children}
       </main>
       <Footer menus={{ footer: menus.footer }} blocks={blocks} />

@@ -6,7 +6,7 @@ import { getGlobalElements } from "lib/get-global-elements";
 // import { getParams } from "lib/get-params";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { Layout, LayoutProps } from "components/layout";
-// import Carousel from "components/carousel";
+import Carousel from "components/carousel";
 import { NodeFrontPage } from "components/node--front--page";
 
 interface IndexPageProps extends LayoutProps {
@@ -22,10 +22,9 @@ export default function IndexPage({ menus, node, blocks }: IndexPageProps) {
 
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
-      <div className="lg:h-60 lg:px-5">
-        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
-          <p className="text-white">Slider here soon</p>
-        </div>
+      <div className="lg:h-60">
+        {/* <p className="text-white">Slider here soon</p> */}
+        <Carousel images={images} />
       </div>
       <div className="p-5">
         <NodeFrontPage node={node as DrupalNode} />

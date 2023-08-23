@@ -14,8 +14,6 @@ export function MediaImages({ media, teaser, ...props }: MediaImageProps) {
     return null;
   }
 
-  console.log(images);
-
   // Get all the images.
   return images.map((image) => (
     <div key={image.id} className="media__content image__wrapper" {...props}>

@@ -22,7 +22,7 @@ export function Header({ menus }: HeaderProps) {
   return (
     <header
       role="banner"
-      className="p-5 xl:container md:py-0 lg:relative lg:flex lg:h-[14rem] lg:flex-col lg:justify-between xl:mx-auto"
+      className="relative z-10 p-5 xl:container md:py-0 lg:relative lg:flex lg:h-[14rem] lg:flex-col lg:justify-between xl:mx-auto"
     >
       <div className="hidden lg:flex lg:justify-end lg:pt-5">
         <MenuQuickLinks items={menus.quickLinks} />
