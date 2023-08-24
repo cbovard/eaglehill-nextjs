@@ -1,21 +1,25 @@
 import React, { useState } from "react";
+import Image from "next/image";
+
+interface CarouselImage {
+  field_slideshow_image: {
+    field_media_image: {
+      image_style_uri: {
+        image_1240x400_webp: string;
+      };
+      resourceIdObjMeta: {
+        alt?: string;
+      };
+    };
+  };
+}
 
 interface CarouselProps {
-  images: string[];
+  images: CarouselImage[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
-    );
-  };
 
   const handleIndicatorClick = (index: number) => {
     setCurrentIndex(index);
@@ -25,11 +29,26 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
     <div className="relative h-full">
       <div className="relative z-0 flex h-full items-center justify-center">
         {images.map((image, index) => (
-          <img
+          <Image
             key={index}
-            src={image}
-            alt={`Slide ${index + 1}`}
-            className={`absolute left-0 top-0 h-full w-full transition-opacity duration-500 ${
+            src={
+              image.field_slideshow_image.field_media_image.image_style_uri
+                .image_1240x400_webp
+            }
+            alt={
+              image.field_slideshow_image.field_media_image.resourceIdObjMeta
+                .alt || "Eagle Hill Equine"
+            }
+            width={1240}
+            height={400}
+            priority={index === 0} // Set to true for the first iteration, false for the rest
+            sizes="(max-width: 768px) 33vw, (max-width: 1024px) 50vw, 100vw"
+            placeholder="blur"
+            blurDataURL={
+              image.field_slideshow_image.field_media_image.image_style_uri
+                .image_1240x400_webp
+            }
+            className={`absolute left-0 top-0 h-full w-full object-cover transition-opacity duration-500 ${
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
             style={{ zIndex: index === currentIndex ? 10 : 1 }}
@@ -47,20 +66,6 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
           />
         ))}
       </div>
-      {/* <div className="absolute bottom-0 left-0 right-0 flex justify-center mt-2">
-        <button
-          onClick={handlePrev}
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-l"
-        >
-          Previous
-        </button>
-        <button
-          onClick={handleNext}
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-r"
-        >
-          Next
-        </button>
-      </div> */}
     </div>
   );
 };

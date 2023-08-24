@@ -1,9 +1,11 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
+import { getParams } from "lib/get-params";
 import { Layout, LayoutProps } from "components/layout";
 import { Pager, PagerProps } from "components/pager";
 import { getCustomDrupalView } from "lib/utils";
-// import { PageHeader } from "components/page-header";
+import Carousel from "components/carousel";
 import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
@@ -13,6 +15,7 @@ export const NUMBER_OF_POSTS_PER_PAGE = 6;
 
 export interface StallionsPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">;
+  slideShowBlock: any;
   nodes: any;
 }
 
@@ -20,6 +23,7 @@ export default function StallionsPage({
   menus,
   blocks,
   page,
+  slideShowBlock,
   nodes,
 }: StallionsPageProps) {
   // If there is only one page of nodes
@@ -30,18 +34,8 @@ export default function StallionsPage({
 
   return (
     <Layout meta={{ title: "Stallions" }} menus={menus} blocks={blocks}>
-      {/* <PageHeader
-        heading="Stallions"
-        breadcrumbs={[
-          {
-            title: "Stallions",
-          },
-        ]}
-      /> */}
-      <div className="lg:h-60 lg:px-5">
-        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
-          <p className="text-white">Slider here soon</p>
-        </div>
+      <div className="h-52 px-5 sm:h-80 lg:h-[25rem]">
+        <Carousel images={slideShowBlock.results} />
       </div>
       <div className="p-5 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-6">
         <div className="pt-5 lg:col-span-9">
@@ -116,9 +110,17 @@ export async function getStaticProps(
     current: current,
   });
 
+  const slideShowBlock = await drupal.getView<DrupalBlock[]>(
+    "slideshows--sub_slideshow_block",
+    {
+      params: getParams("slideshows--slideshow_block").getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
+      slideShowBlock,
       nodes,
       page: {
         current,

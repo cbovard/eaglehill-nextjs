@@ -63,8 +63,8 @@ export function NodeLivestockTeaser({ node, ...props }) {
               }
               width={800}
               height={600}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              quality={80}
+              sizes="(max-width: 768px) 25vw, (max-width: 1024px) 33vw, 25vw"
+              quality={70}
               placeholder="blur"
               blurDataURL={
                 node.field_livestock_images[0].field_media_image.image_style_uri

@@ -1,30 +1,28 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { DrupalBlock, DrupalNode } from "next-drupal";
-// import classNames from "classnames";
 import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
-// import { getParams } from "lib/get-params";
+import { getParams } from "lib/get-params";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { Layout, LayoutProps } from "components/layout";
 import Carousel from "components/carousel";
 import { NodeFrontPage } from "components/node--front--page";
 
 interface IndexPageProps extends LayoutProps {
+  slideShowBlock: any;
   node: DrupalNode;
 }
 
-export default function IndexPage({ menus, node, blocks }: IndexPageProps) {
-  const images = [
-    "https://images.dog.ceo/breeds/weimaraner/n02092339_8024.jpg",
-    "https://images.dog.ceo/breeds/poodle-standard/n02113799_1140.jpg",
-    "https://images.dog.ceo/breeds/ovcharka-caucasian/IMG_20190611_152047.jpg",
-  ];
-
+export default function IndexPage({
+  menus,
+  slideShowBlock,
+  node,
+  blocks,
+}: IndexPageProps) {
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
-      <div className="lg:h-60">
-        {/* <p className="text-white">Slider here soon</p> */}
-        <Carousel images={images} />
+      <div className="h-52 px-5 sm:h-80 lg:h-[25rem]">
+        <Carousel images={slideShowBlock.results} />
       </div>
       <div className="p-5">
         <NodeFrontPage node={node as DrupalNode} />
@@ -52,9 +50,17 @@ export async function getStaticProps(
     },
   );
 
+  const slideShowBlock = await drupal.getView<DrupalBlock[]>(
+    "slideshows--front_slideshow_block",
+    {
+      params: getParams("slideshows--slideshow_block").getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
+      slideShowBlock,
       node,
     },
   };

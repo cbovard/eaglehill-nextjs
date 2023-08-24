@@ -42,6 +42,10 @@ export function getParams(
       .addFields("file--file", ["uri", "resourceIdObjMeta", "image_style_uri"]);
   }
 
+  if (name === "slideshows--slideshow_block") {
+    return params.addInclude(["field_slideshow_image.field_media_image"]);
+  }
+
   if (name === "block_content--news_block") {
     return params.addFields("node--news", ["title", "body", "path"]);
   }

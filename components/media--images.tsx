@@ -24,8 +24,8 @@ export function MediaImages({ media, teaser, ...props }: MediaImageProps) {
         }
         width={800}
         height={600}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        quality={80}
+        sizes="(max-width: 768px) 25vw, (max-width: 1024px) 33vw, 25vw"
+        quality={70}
         placeholder="blur"
         blurDataURL={image.field_media_image.image_style_uri.image_800x600_webp}
         className="h-auto w-full overflow-hidden rounded-lg transition-all duration-300 hover:opacity-70"
