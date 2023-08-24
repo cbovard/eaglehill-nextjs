@@ -1,4 +1,5 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { DrupalBlock } from "next-drupal";
 import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
 import { getParams } from "lib/get-params";
