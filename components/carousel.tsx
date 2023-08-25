@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { DrupalView } from "next-drupal";
 
-interface CarouselImage {
-  field_slideshow_image: {
-    field_media_image: {
-      image_style_uri: {
-        image_1240x400_webp: string;
-      };
-      resourceIdObjMeta: {
-        alt?: string;
-      };
-    };
-  };
-}
+// export interface CarouselImage {
+//   field_slideshow_image: {
+//     field_media_image: {
+//       image_style_uri: {
+//         image_1240x400_webp: string;
+//       };
+//       resourceIdObjMeta: {
+//         alt?: string;
+//       };
+//     };
+//   };
+// }
 
 interface CarouselProps {
-  images: CarouselImage[];
+  images: DrupalView;
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
@@ -28,7 +29,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   return (
     <div className="relative h-full">
       <div className="relative z-0 flex h-full items-center justify-center">
-        {images.map((image, index) => (
+        {images.results.map((image, index) => (
           <Image
             key={index}
             src={
@@ -56,7 +57,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
         ))}
       </div>
       <div className="absolute bottom-0 left-0 right-0 z-10 mt-2 flex justify-center">
-        {images.map((_, index) => (
+        {images.results.map((_, index) => (
           <div
             key={index}
             onClick={() => handleIndicatorClick(index)}

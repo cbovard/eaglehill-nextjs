@@ -1,5 +1,5 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
-import { DrupalBlock } from "next-drupal";
+import { DrupalView } from "next-drupal";
 import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
 import { getParams } from "lib/get-params";
@@ -16,7 +16,7 @@ export const NUMBER_OF_POSTS_PER_PAGE = 6;
 
 export interface StallionsPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">;
-  slideShowBlock: any;
+  slideShowBlock: DrupalView;
   nodes: any;
 }
 
@@ -36,7 +36,7 @@ export default function StallionsPage({
   return (
     <Layout meta={{ title: "Stallions" }} menus={menus} blocks={blocks}>
       <div className="h-52 px-5 sm:h-80 lg:h-[25rem]">
-        <Carousel images={slideShowBlock.results} />
+        <Carousel images={slideShowBlock} />
       </div>
       <div className="p-5 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-6">
         <div className="pt-5 lg:col-span-9">
@@ -111,7 +111,7 @@ export async function getStaticProps(
     current: current,
   });
 
-  const slideShowBlock = await drupal.getView<DrupalBlock[]>(
+  const slideShowBlock = await drupal.getView<DrupalView[]>(
     "slideshows--sub_slideshow_block",
     {
       params: getParams("slideshows--slideshow_block").getQueryObject(),

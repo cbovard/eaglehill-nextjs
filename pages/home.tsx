@@ -1,5 +1,5 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
-import { DrupalBlock, DrupalNode } from "next-drupal";
+import { DrupalView, DrupalNode } from "next-drupal";
 import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
 import { getParams } from "lib/get-params";
@@ -9,7 +9,7 @@ import Carousel from "components/carousel";
 import { NodeFrontPage } from "components/node--front--page";
 
 interface IndexPageProps extends LayoutProps {
-  slideShowBlock: any;
+  slideShowBlock: DrupalView;
   node: DrupalNode;
 }
 
@@ -22,7 +22,7 @@ export default function IndexPage({
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <div className="h-52 px-5 sm:h-80 lg:h-[25rem]">
-        <Carousel images={slideShowBlock.results} />
+        <Carousel images={slideShowBlock} />
       </div>
       <div className="p-5">
         <NodeFrontPage node={node as DrupalNode} />
@@ -50,7 +50,7 @@ export async function getStaticProps(
     },
   );
 
-  const slideShowBlock = await drupal.getView<DrupalBlock[]>(
+  const slideShowBlock = await drupal.getView<DrupalView[]>(
     "slideshows--front_slideshow_block",
     {
       params: getParams("slideshows--slideshow_block").getQueryObject(),
