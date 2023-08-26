@@ -21,9 +21,7 @@ export default function IndexPage({
 }: IndexPageProps) {
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
-      <div className="h-52 px-5 sm:h-80 lg:h-[25rem]">
-        <Carousel images={slideShowBlock} />
-      </div>
+      <Carousel images={slideShowBlock} />
       <div className="p-5">
         <NodeFrontPage node={node as DrupalNode} />
       </div>

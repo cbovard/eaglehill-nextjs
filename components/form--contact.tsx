@@ -162,8 +162,8 @@ export function FormContact({ className, ...props }: FormContactProps) {
               disabled={formStatus?.status === "fetching"}
               value={
                 formStatus?.status === "fetching"
-                  ? "please-wait"
-                  : "send-message"
+                  ? "Please Wait"
+                  : "Send Message"
               }
             />
           </div>

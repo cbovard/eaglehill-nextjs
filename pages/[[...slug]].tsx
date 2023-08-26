@@ -4,28 +4,30 @@ import {
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from "next";
-import { DrupalNode } from "next-drupal";
-
+import { DrupalNode, DrupalView } from "next-drupal";
 import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
 import { getParams } from "lib/get-params";
 import { Layout, LayoutProps } from "components/layout";
+import Carousel from "components/carousel";
 import { Node } from "components/node";
 
 const RESOURCE_TYPES = ["node--page", "node--news", "node--livestock"];
 
 interface NodePageProps extends LayoutProps {
+  slideShowBlock: DrupalView;
   node: DrupalNode;
 }
 
-export default function NodePage({ menus, blocks, node }: NodePageProps) {
+export default function NodePage({
+  menus,
+  blocks,
+  slideShowBlock,
+  node,
+}: NodePageProps) {
   return (
     <Layout meta={{ title: node.title }} menus={menus} blocks={blocks}>
-      <div className="lg:h-60 lg:px-5">
-        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
-          <p className="text-white">Slider here soon</p>
-        </div>
-      </div>
+      <Carousel images={slideShowBlock} />
       <div className="g:grid-rows-1 p-5 lg:grid lg:grid-cols-12 lg:gap-6">
         <div className="pt-5 lg:col-span-9">
           <Node node={node} />
@@ -69,9 +71,17 @@ export async function getStaticProps(
     };
   }
 
+  const slideShowBlock = await drupal.getView<DrupalView[]>(
+    "slideshows--sub_slideshow_block",
+    {
+      params: getParams("slideshows--slideshow_block").getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
+      slideShowBlock,
       node,
     },
   };

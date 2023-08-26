@@ -1,9 +1,12 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { DrupalView } from "next-drupal";
+import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
+import { getParams } from "lib/get-params";
 import { Layout, LayoutProps } from "components/layout";
 import { Pager, PagerProps } from "components/pager";
 import { getCustomDrupalView } from "lib/utils";
-import { PageHeader } from "components/page-header";
+import Carousel from "components/carousel";
 import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
@@ -13,6 +16,7 @@ export const NUMBER_OF_POSTS_PER_PAGE = 6;
 
 export interface DonkeysPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">;
+  slideShowBlock: DrupalView;
   nodes: any;
 }
 
@@ -20,6 +24,7 @@ export default function DonkeysPagePage({
   menus,
   blocks,
   page,
+  slideShowBlock,
   nodes,
 }: DonkeysPageProps) {
   // If there is only one page of nodes.
@@ -27,39 +32,54 @@ export default function DonkeysPagePage({
 
   return (
     <Layout meta={{ title: "Our Donkeys" }} menus={menus} blocks={blocks}>
-      <PageHeader
-        heading="Our Donkeys"
-        breadcrumbs={[
-          {
-            title: "Our Donkeys",
-          },
-        ]}
-      />
-      <div className="container mx-auto max-w-6xl px-6 pt-10 md:py-20">
-        <div>
-          <p>
-            Our Small Standard Donkeys are wonderful pets, guard animals, or
-            companion animals. Give us a call and we will talk on the fantastic
-            personalities of donkeys.
-          </p>
-        </div>
-        {nodes.results.length ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {nodes.results.map((donkeysNode) => (
-              <Node viewMode="teaser" key={donkeysNode.id} node={donkeysNode} />
-            ))}
+      <Carousel images={slideShowBlock} />
+      <div className="p-5 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-6">
+        <div className="pt-5 lg:col-span-9">
+          <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:pl-5 lg:text-left lg:text-5xl">
+            Our Donkeys
+          </h1>
+          <div className="mb-7 rounded border border-deep-fir-900 bg-deep-fir-950 p-4">
+            {/* { todo - this needs to be in a block down the road} */}
+            <div
+              className="text-white prose-headings:font-bebas-neue prose-headings:tracking-wide prose-headings:text-deep-fir-100
+        prose-p:mb-2 prose-p:text-base prose-a:text-deep-fir-400
+        prose-a:underline prose-a:underline-offset-2 prose-a:transition-all hover:prose-a:underline-offset-4"
+            >
+              <p>
+                Our Small Standard Donkeys are wonderful pets, guard animals, or
+                companion animals. Give us a call and we will talk on the
+                fantastic personalities of donkeys.
+              </p>
+            </div>
           </div>
-        ) : (
-          <p className="py-6">No posts found</p>
-        )}
-        {pageCount ? (
-          <Pager
-            current={page.current}
-            total={page.total}
-            href={(page) => (page === 0 ? `/donkeys` : `/donkeys/page/${page}`)}
-            className="mt-8 py-8"
-          />
-        ) : null}
+          {nodes.results.length ? (
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {nodes.results.map((donkeysNode) => (
+                <Node
+                  viewMode="teaser"
+                  key={donkeysNode.id}
+                  node={donkeysNode}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="py-6">No posts found</p>
+          )}
+          {pageCount ? (
+            <Pager
+              current={page.current}
+              total={page.total}
+              href={(page) =>
+                page === 0 ? `/donkeys` : `/donkeys/page/${page}`
+              }
+              className="mt-8 py-8"
+            />
+          ) : null}
+        </div>
+        <aside className="hidden lg:col-span-3 lg:block">
+          <h2 className="text-white">Sidebar on larger</h2>
+          <p className="text-white">Going to add the Sidebar fun soon</p>
+        </aside>
       </div>
     </Layout>
   );
@@ -98,9 +118,17 @@ export async function getStaticProps(
     current: current,
   });
 
+  const slideShowBlock = await drupal.getView<DrupalView[]>(
+    "slideshows--sub_slideshow_block",
+    {
+      params: getParams("slideshows--slideshow_block").getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
+      slideShowBlock,
       nodes,
       page: {
         current,

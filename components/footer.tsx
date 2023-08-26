@@ -54,7 +54,7 @@ export function Footer({ menus, blocks }: FooterProps) {
                       className="text-sm text-deep-fir-400 underline underline-offset-1 transition-all duration-200 hover:underline-offset-2"
                       passHref
                     >
-                      more
+                      More News
                     </Link>
                   </article>
                 ))}

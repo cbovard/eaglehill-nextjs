@@ -1,9 +1,12 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { DrupalView } from "next-drupal";
+import { drupal } from "lib/drupal";
 import { getGlobalElements } from "lib/get-global-elements";
+import { getParams } from "lib/get-params";
 import { Layout, LayoutProps } from "components/layout";
 import { Pager, PagerProps } from "components/pager";
 import { getCustomDrupalView } from "lib/utils";
-// import { PageHeader } from "components/page-header";
+import Carousel from "components/carousel";
 import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
@@ -13,6 +16,7 @@ export const NUMBER_OF_POSTS_PER_PAGE = 6;
 
 export interface ForSalePageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">;
+  slideShowBlock: DrupalView;
   nodes: any;
 }
 
@@ -20,6 +24,7 @@ export default function ForSalePagePage({
   menus,
   blocks,
   page,
+  slideShowBlock,
   nodes,
 }: ForSalePageProps) {
   // If there is only one page of nodes.
@@ -31,23 +36,11 @@ export default function ForSalePagePage({
       menus={menus}
       blocks={blocks}
     >
-      {/* <PageHeader
-        heading="Livestock For Sale"
-        breadcrumbs={[
-          {
-            title: "Livestock For Sale",
-          },
-        ]}
-      /> */}
-      <div className="lg:h-60 lg:px-5">
-        <div className="p-20 outline outline-1 outline-orange-100 lg:h-60">
-          <p className="text-white">Slider here soon</p>
-        </div>
-      </div>
+      <Carousel images={slideShowBlock} />
       <div className="p-5 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-6">
         <div className="pt-5 lg:col-span-9">
           <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:pl-5 lg:text-left lg:text-5xl">
-            Show Horses
+            Livestock For Sale
           </h1>
           <div className="mb-7 rounded border border-deep-fir-900 bg-deep-fir-950 p-4">
             {/* { todo - this needs to be in a block down the road} */}
@@ -64,6 +57,10 @@ export default function ForSalePagePage({
                 Canadian dollars. Thank you to all who have purchased our
                 animals. We know they have great homes and you will enjoy them
                 as we did while they lived here!
+              </p>
+              <p>
+                Canadian Distributor for Lifeline Equine products. Contact us
+                today{" "}
               </p>
             </div>
           </div>
@@ -136,9 +133,17 @@ export async function getStaticProps(
     current: current,
   });
 
+  const slideShowBlock = await drupal.getView<DrupalView[]>(
+    "slideshows--sub_slideshow_block",
+    {
+      params: getParams("slideshows--slideshow_block").getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
+      slideShowBlock,
       nodes,
       page: {
         current,

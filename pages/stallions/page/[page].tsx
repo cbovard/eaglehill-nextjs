@@ -35,9 +35,7 @@ export default function StallionsPage({
 
   return (
     <Layout meta={{ title: "Stallions" }} menus={menus} blocks={blocks}>
-      <div className="h-52 px-5 sm:h-80 lg:h-[25rem]">
-        <Carousel images={slideShowBlock} />
-      </div>
+      <Carousel images={slideShowBlock} />
       <div className="p-5 lg:grid lg:grid-cols-12 lg:grid-rows-1 lg:gap-6">
         <div className="pt-5 lg:col-span-9">
           <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:pl-5 lg:text-left lg:text-5xl">
