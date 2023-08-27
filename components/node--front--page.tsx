@@ -8,11 +8,11 @@ interface NodeFrontPageProps {
 
 export function NodeFrontPage({ node }: NodeFrontPageProps) {
   return (
-    <article className="rounded border border-deep-fir-900 bg-deep-fir-950 p-4">
+    <article className="rounded border border-deep-fir-900 bg-deep-fir-950 p-4 lg:pt-6">
       <header>
-        <h1 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:pl-5 lg:text-5xl">
+        <h2 className="mb-3 text-center font-bebas-neue text-4xl tracking-wide text-deep-fir-100 md:text-4xl lg:mb-5 lg:text-left lg:text-5xl xl:mb-6">
           {node.title}
-        </h1>
+        </h2>
       </header>
       <section
         className="mb-7 text-white prose-headings:font-bebas-neue prose-headings:tracking-wide prose-headings:text-deep-fir-100

@@ -22,6 +22,8 @@ export default function IndexPage({
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <Carousel images={slideShowBlock} />
+      {/* <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        </section> */}
       <div className="p-5">
         <NodeFrontPage node={node as DrupalNode} />
       </div>

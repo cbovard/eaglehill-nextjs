@@ -1,11 +1,8 @@
 import * as React from "react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { DrupalMenuLinkContent } from "next-drupal";
 import classNames from "classnames";
-
-import siteConfig from "site.config";
-import Image from "next/image";
-import logoImage from "../public/images/logo.png";
+import { Logo } from "components/logo";
 import { MenuMain } from "components/menu-main";
 import { MenuQuickLinks } from "components/menu-quick-links";
 
@@ -19,6 +16,10 @@ export interface HeaderProps {
 export function Header({ menus }: HeaderProps) {
   const [showMenu, setShowMenu] = React.useState<Boolean>(false);
 
+  // TODO - move this to site.config.js ?
+  const router = useRouter();
+  const isFront = router.pathname === "/home";
+
   return (
     <header
       role="banner"
@@ -29,20 +30,13 @@ export function Header({ menus }: HeaderProps) {
       </div>
       <div className="w-full lg:absolute lg:left-5 lg:top-4 lg:w-[325px]">
         <div className="mx-auto max-w-[70%] pt-3 sm:max-w-[325px]">
-          <Link href="/" passHref>
-            <Image
-              src={logoImage}
-              alt={siteConfig.name}
-              priority={true}
-              placeholder="blur"
-              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 100vw"
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-              }}
-            />
-            <span className="sr-only">{siteConfig.name}</span>
-          </Link>
+          {isFront ? (
+            <h1>
+              <Logo />
+            </h1>
+          ) : (
+            <Logo />
+          )}
         </div>
       </div>
       <button
