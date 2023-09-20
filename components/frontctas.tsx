@@ -9,18 +9,24 @@ interface FrontCtasProps {
 
 const FrontCtas: React.FC<FrontCtasProps> = ({ ctas }) => {
   return (
-    <div className="px-5">
-      <div className="grid grid-cols-2 gap-4 bg-black md:grid-cols-3 lg:grid-cols-4">
+    <div className="px-5 pt-5">
+      <div className="sm:gap:4 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
         {ctas.results.map((cta, index) => (
-          <article key={index}>
+          <article
+            key={index}
+            className="rounded-lg bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-deep-fir-800 via-deep-fir-900 to-deep-fir-950
+            px-2 py-2.5 sm:flex sm:flex-col"
+          >
             <header>
-              <Link
-                href={cta.field_internal_link.uri.replace(/^internal:/, "")} // Removes "internal:"
-                passHref
-                className="text-sm text-gray-400 transition-all hover:text-lime-500 hover:underline"
-              >
-                <h2>{cta.title}</h2>
-              </Link>
+              <h2 className="mb-1.5">
+                <Link
+                  href={cta.field_internal_link.uri.replace(/^internal:/, "")} // Removes "internal:"
+                  className="font-bebas-neue text-4xl tracking-wide text-white shadow-black transition-all duration-200 text-shadow md:text-3xl xl:text-5xl"
+                  passHref
+                >
+                  {cta.title}
+                </Link>
+              </h2>
             </header>
             <Link
               href={cta.field_internal_link.uri.replace(/^internal:/, "")} // Removes "internal:"
@@ -44,17 +50,20 @@ const FrontCtas: React.FC<FrontCtasProps> = ({ ctas }) => {
                   cta.field_cta_image.field_media_image.image_style_uri
                     .image_800x600_webp
                 }
-                className="h-auto w-full overflow-hidden rounded-lg transition-all duration-300 hover:opacity-70"
+                className="h-auto w-full overflow-hidden rounded-lg transition-all duration-300 hover:opacity-80"
               />
             </Link>
-            <section>
-              <p className="text-white">{cta.field_cta_body}</p>
+            <section className="mt-3 px-1.5">
+              <p className="text-base font-medium text-white shadow-black text-shadow-sm">
+                {cta.field_cta_body}
+              </p>
             </section>
-            <footer>
+            <footer className="mt-auto pt-4 text-center">
               <Link
                 href={cta.field_internal_link.uri.replace(/^internal:/, "")} // Removes "internal:"
                 passHref
-                className="text-sm text-gray-400 transition-all hover:text-lime-500 hover:underline"
+                className="text-md mb-2 inline-block rounded-md bg-gradient-to-b from-deep-fir-700 to-deep-fir-800
+                p-2 font-bold text-white shadow-black text-shadow-sm hover:from-deep-fir-800 hover:to-deep-fir-700"
               >
                 {cta.field_internal_link.title}
               </Link>

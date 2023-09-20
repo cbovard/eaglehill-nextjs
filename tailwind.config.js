@@ -34,10 +34,28 @@ module.exports = {
           "0 8px 5px rgba(255,255,255, 0.1)",
         ],
       },
+      textShadow: {
+        sm: "1px 1px 0 var(--tw-shadow-color)",
+        DEFAULT: "2px 2px 0 var(--tw-shadow-color)",
+        lg: "4px 4px 0 var(--tw-shadow-color)",
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    // Add your custom plugin here
+    function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") },
+      );
+    },
+  ],
 };
