@@ -6,24 +6,28 @@ import { getParams } from "lib/get-params";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { Layout, LayoutProps } from "components/layout";
 import Carousel from "components/carousel";
+import FrontCtas from "components/frontctas";
 import { NodeFrontPage } from "components/node--front--page";
 
 interface IndexPageProps extends LayoutProps {
   slideShowBlock: DrupalView;
+  frontCtasBlock: DrupalView;
   node: DrupalNode;
 }
 
 export default function IndexPage({
   menus,
   slideShowBlock,
+  frontCtasBlock,
   node,
   blocks,
 }: IndexPageProps) {
+  console.log(frontCtasBlock);
+
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <Carousel images={slideShowBlock} />
-      {/* <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        </section> */}
+      <FrontCtas ctas={frontCtasBlock} />
       <div className="p-5">
         <NodeFrontPage node={node as DrupalNode} />
       </div>
@@ -57,10 +61,20 @@ export async function getStaticProps(
     },
   );
 
+  const frontCtasBlock = await drupal.getView<DrupalView[]>(
+    "front_page_ctas--front_page_ctas_block",
+    {
+      params: getParams(
+        "front_page_ctas--front_page_ctas_block",
+      ).getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
       slideShowBlock,
+      frontCtasBlock,
       node,
     },
   };
