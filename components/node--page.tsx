@@ -20,9 +20,7 @@ export function NodePage({ node, ...props }: NodeProps) {
         {node.body?.processed && <FormattedText text={node.body.processed} />}
       </section>
       {node.field_page_images?.length ? (
-        <section className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          <MediaImages media={node.field_page_images} teaser={false} />
-        </section>
+        <MediaImages media={node.field_page_images} teaser={false} />
       ) : null}
     </article>
   );

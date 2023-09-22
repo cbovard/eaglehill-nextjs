@@ -35,9 +35,7 @@ export function NodeLivestockFull({ node, ...props }) {
         {node.body?.processed && <FormattedText text={node.body.processed} />}
       </section>
       {node.field_livestock_images?.length ? (
-        <section className="flex flex-row flex-wrap justify-center gap-2">
-          <MediaImages media={node.field_livestock_images} teaser={false} />
-        </section>
+        <MediaImages media={node.field_livestock_images} teaser={false} />
       ) : null}
     </article>
   );
