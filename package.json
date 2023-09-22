@@ -17,6 +17,7 @@
     "drupal-jsonapi-params": "^2.2.0",
     "html-react-parser": "^3.0.16",
     "jsona": "^1.11.0",
+    "lightgallery": "^2.7.2",
     "next": "^13",
     "next-drupal": "^1.5.0",
     "qs": "^6.11.2",

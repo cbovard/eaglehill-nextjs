@@ -22,8 +22,6 @@ export default function IndexPage({
   node,
   blocks,
 }: IndexPageProps) {
-  console.log(frontCtasBlock);
-
   return (
     <Layout meta={{ title: "Home" }} menus={menus} blocks={blocks}>
       <Carousel images={slideShowBlock} />
