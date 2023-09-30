@@ -13,6 +13,8 @@ export interface FooterProps {
 }
 
 export function Footer({ menus, blocks }: FooterProps) {
+  //console.log(blocks.newsBlock);
+
   return (
     <footer
       role="contentinfo"
@@ -37,15 +39,13 @@ export function Footer({ menus, blocks }: FooterProps) {
                         {news_node.title}
                       </Link>
                     </h5>
-                    {news_node.body.processed && (
+                    {news_node.body?.processed && (
                       <section>
                         <p className="text-base text-white">
-                          {news_node.body?.processed && (
-                            <TeaserText
-                              text={news_node.body.processed}
-                              maxLength={110}
-                            />
-                          )}
+                          <TeaserText
+                            text={news_node.body.processed}
+                            maxLength={110}
+                          />
                         </p>
                       </section>
                     )}
