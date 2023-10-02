@@ -54,6 +54,7 @@ export async function getStaticProps(
   context: GetStaticPropsContext,
 ): Promise<GetStaticPropsResult<NodePageProps>> {
   const path = await drupal.translatePathFromContext(context);
+  console.log(path);
   if (!path || !RESOURCE_TYPES.includes(path.jsonapi.resourceName)) {
     return {
       notFound: true,

@@ -1,9 +1,12 @@
 import { NodeProps } from "components/node";
 import { MediaImages } from "components/media--images";
 import { FormattedText } from "./formatted-text";
+import { useRouter } from "next/router";
+import { FormEmployment } from "components/form--employment";
 
 export function NodePage({ node, ...props }: NodeProps) {
   delete props.viewMode;
+  const router = useRouter();
 
   return (
     <article className="rounded border border-deep-fir-900 bg-deep-fir-950 p-4">
@@ -19,6 +22,11 @@ export function NodePage({ node, ...props }: NodeProps) {
       >
         {node.body?.processed && <FormattedText text={node.body.processed} />}
       </section>
+      {router.asPath === "/employment" && (
+        <section>
+          <FormEmployment />
+        </section>
+      )}
       {node.field_page_images?.length ? (
         <MediaImages media={node.field_page_images} teaser={false} />
       ) : null}
