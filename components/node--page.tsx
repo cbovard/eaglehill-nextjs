@@ -16,9 +16,9 @@ export function NodePage({ node, ...props }: NodeProps) {
         </h1>
       </header>
       <section
-        className="mb-7 text-white prose-headings:font-bebas-neue prose-headings:tracking-wide prose-headings:text-deep-fir-100
-        prose-p:mb-2 prose-p:text-base prose-a:text-deep-fir-400
-        prose-a:underline prose-a:underline-offset-2 prose-a:transition-all hover:prose-a:underline-offset-4"
+        className="mb-8 text-white prose-h2:mb-3 prose-h2:text-xl prose-p:mb-2
+        prose-p:text-base prose-a:text-deep-fir-400 prose-a:underline
+        prose-a:underline-offset-2 prose-a:transition-all hover:prose-a:underline-offset-4 prose-h2:lg:text-2xl"
       >
         {node.body?.processed && <FormattedText text={node.body.processed} />}
       </section>

@@ -17,10 +17,10 @@ export default async function handler(
 
       // Format the payload for /webform_rest/submit
       const payload = {
-        webform_id: "contact_main_form",
+        webform_id: "employment",
         name: body.name,
         email: body.email,
-        subject: body.subject,
+        telephone: body.telephone,
         message: body.message,
       };
 
