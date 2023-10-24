@@ -19,8 +19,8 @@ export function PagerItem({ link }) {
     if (link.isCurrent) {
       return (
         <span
-          className="flex h-8 items-center justify-center rounded-lg border border-deep-fir-700
-        px-3 leading-tight text-white"
+          className="flex h-8 items-center justify-center rounded-lg border border-gray-700
+        px-3 leading-tight text-deep-fir-400"
         >
           {link.display}
         </span>
