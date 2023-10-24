@@ -15,13 +15,15 @@ export default async function handler(
       // You can make a request to your site with these values.
       const body = JSON.parse(req.body);
 
+      console.log(body);
+
       // Format the payload for /webform_rest/submit
       const payload = {
         webform_id: "employment",
-        name: body.name,
-        email: body.email,
-        telephone: body.telephone,
-        message: body.message,
+        your_name: body.name,
+        your_email: body.email,
+        your_telephone: body.telephone,
+        tell_us_a_bit_about_you: body.message,
       };
 
       // Send the payload to Drupal.

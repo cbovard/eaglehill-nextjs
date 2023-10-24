@@ -12,7 +12,6 @@ interface FormStatus {
 
 export function FormEmployment({ className, ...props }: FormEmploymentProps) {
   const [isCanadianResident, setIsCanadianResident] = React.useState(false);
-  //const [isLoading, setIsLoading] = useState(true);
   const [formStatus, setFormStatus] = React.useState<FormStatus>(null);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -155,7 +154,6 @@ export function FormEmployment({ className, ...props }: FormEmploymentProps) {
                 maxLength={255}
                 value={telephone}
                 onChange={(event) => setTelephone(event.target.value)}
-                required
                 className="border-gray focus:outline-link focus:border-gray border-2 px-2 py-3 text-black focus:outline-dotted focus:outline-offset-2"
               />
             </div>
@@ -176,8 +174,8 @@ export function FormEmployment({ className, ...props }: FormEmploymentProps) {
             <div>
               <input
                 type="submit"
-                className="mt-2 inline-block rounded-md bg-gradient-to-b from-deep-fir-700 to-deep-fir-800 px-6 py-3
-          text-xl font-bold text-white shadow-black text-shadow-sm hover:from-deep-fir-800 hover:to-deep-fir-700"
+                className="mt-2 inline-block cursor-pointer rounded-md bg-gradient-to-b from-deep-fir-700 to-deep-fir-800 px-6
+          py-3 text-xl font-bold text-white shadow-black text-shadow-sm hover:from-deep-fir-800 hover:to-deep-fir-700"
                 disabled={formStatus?.status === "fetching"}
                 value={
                   formStatus?.status === "fetching"
@@ -188,7 +186,9 @@ export function FormEmployment({ className, ...props }: FormEmploymentProps) {
             </div>
           </form>
         ) : (
-          <h2>Sorry, this form is only for Canadian residents.</h2>
+          <h2>
+            <strong>Sorry, this form is only for Canadian residents.</strong>
+          </h2>
         )}
       </div>
     </div>

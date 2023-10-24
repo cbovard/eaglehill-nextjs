@@ -158,7 +158,8 @@ export function FormContact({ className, ...props }: FormContactProps) {
           <div>
             <input
               type="submit"
-              className="bg-link border-link cursor-pointer rounded-sm border-2 px-6 py-3 font-serif text-xl text-white transition-colors hover:bg-white hover:text-black"
+              className="mt-2 inline-block cursor-pointer rounded-md bg-gradient-to-b from-deep-fir-700 to-deep-fir-800 px-6
+          py-3 text-xl font-bold text-white shadow-black text-shadow-sm hover:from-deep-fir-800 hover:to-deep-fir-700"
               disabled={formStatus?.status === "fetching"}
               value={
                 formStatus?.status === "fetching"
