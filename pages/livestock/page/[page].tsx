@@ -96,7 +96,7 @@ export default function LivestockPagePage({
             </div>
           </div>
           {nodes.results.length ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:content-stretch md:justify-center">
               {nodes.results.map((livestockNode) => (
                 <Node
                   viewMode="teaser"
@@ -106,7 +106,7 @@ export default function LivestockPagePage({
               ))}
             </div>
           ) : (
-            <p className="py-6">No posts found</p>
+            <p className="py-6 text-4xl text-white">No Livestock found.</p>
           )}
           {pageCount ? (
             <Pager
