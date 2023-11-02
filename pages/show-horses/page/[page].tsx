@@ -7,6 +7,7 @@ import { Layout, LayoutProps } from "components/layout";
 import { Pager, PagerProps } from "components/pager";
 import { getCustomDrupalView } from "lib/utils";
 import Carousel from "components/carousel";
+import SidebarCtas from "components/sidebar";
 import { Node } from "components/node";
 // GET THE META SEO GOING
 // import { Meta } from "components/meta"
@@ -17,6 +18,7 @@ export const NUMBER_OF_POSTS_PER_PAGE = 6;
 export interface ShowHorsesPageProps extends LayoutProps {
   page: Pick<PagerProps, "current" | "total">;
   slideShowBlock: DrupalView;
+  sidebarCtasBlock: DrupalView;
   nodes: any;
 }
 
@@ -25,6 +27,7 @@ export default function ShowHorsesPage({
   blocks,
   slideShowBlock,
   page,
+  sidebarCtasBlock,
   nodes,
 }: ShowHorsesPageProps) {
   // If there is only one page of nodes
@@ -110,9 +113,8 @@ export default function ShowHorsesPage({
             <div className="mt-8"></div>
           )}
         </div>
-        <aside className="hidden lg:col-span-3 lg:block">
-          <h2 className="text-white">Sidebar on larger</h2>
-          <p className="text-white">Going to add the Sidebar fun soon</p>
+        <aside className="hidden pt-5 lg:col-span-3 lg:block">
+          <SidebarCtas sidebarCtas={sidebarCtasBlock} />
         </aside>
       </div>
     </Layout>
@@ -159,10 +161,15 @@ export async function getStaticProps(
     },
   );
 
+  const sidebarCtasBlock = await drupal.getView<DrupalView[]>(
+    "sidebar_ctas--sidebar_ctas_block",
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
       slideShowBlock,
+      sidebarCtasBlock,
       nodes,
       page: {
         current,

@@ -1,4 +1,4 @@
-import { DrupalMenuLinkContent, DrupalBlock } from "next-drupal";
+import { DrupalMenuLinkContent } from "next-drupal";
 import Link from "next/link";
 import { TeaserText } from "./formatted-text";
 import { MenuFooter } from "components/menu-footer";
@@ -13,8 +13,6 @@ export interface FooterProps {
 }
 
 export function Footer({ menus, blocks }: FooterProps) {
-  //console.log(blocks.newsBlock);
-
   return (
     <footer
       role="contentinfo"
@@ -25,12 +23,12 @@ export function Footer({ menus, blocks }: FooterProps) {
           <div className="md:flex md:justify-between md:gap-8">
             {blocks?.newsBlock && (
               <div className="text-left md:w-9/12 md:flex-auto md:pr-6">
-                <h4 className="mb-1 font-bebas-neue text-3xl tracking-wide text-deep-fir-100">
+                <p className="mb-1 font-bebas-neue text-3xl tracking-wide text-deep-fir-100">
                   Latest News
-                </h4>
+                </p>
                 {blocks.newsBlock.map((news_node) => (
                   <article key={news_node.id} className="pb-3.5 lg:max-w-2xl">
-                    <h5 className="mb-1 text-lg text-white">
+                    <p className="mb-1 text-lg text-white">
                       <Link
                         href={news_node.path.alias}
                         className="underline underline-offset-2 transition-all duration-200 hover:underline-offset-4"
@@ -38,7 +36,7 @@ export function Footer({ menus, blocks }: FooterProps) {
                       >
                         {news_node.title}
                       </Link>
-                    </h5>
+                    </p>
                     {news_node.body?.processed && (
                       <section>
                         <p className="text-base text-white">

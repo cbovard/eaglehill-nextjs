@@ -10,12 +10,14 @@ import { getGlobalElements } from "lib/get-global-elements";
 import { getParams } from "lib/get-params";
 import { Layout, LayoutProps } from "components/layout";
 import Carousel from "components/carousel";
+import SidebarCtas from "components/sidebar";
 import { Node } from "components/node";
 
 const RESOURCE_TYPES = ["node--page", "node--news", "node--livestock"];
 
 interface NodePageProps extends LayoutProps {
   slideShowBlock: DrupalView;
+  sidebarCtasBlock: DrupalView;
   node: DrupalNode;
 }
 
@@ -23,6 +25,7 @@ export default function NodePage({
   menus,
   blocks,
   slideShowBlock,
+  sidebarCtasBlock,
   node,
 }: NodePageProps) {
   return (
@@ -32,9 +35,8 @@ export default function NodePage({
         <div className="pt-5 lg:col-span-9">
           <Node node={node} />
         </div>
-        <aside className="hidden lg:col-span-3 lg:block">
-          <h2 className="text-white">Sidebar on larger</h2>
-          <p className="text-white">Going to add the Sidebar fun soon</p>
+        <aside className="hidden pt-5 lg:col-span-3 lg:block">
+          <SidebarCtas sidebarCtas={sidebarCtasBlock} />
         </aside>
       </div>
     </Layout>
@@ -78,10 +80,15 @@ export async function getStaticProps(
     },
   );
 
+  const sidebarCtasBlock = await drupal.getView<DrupalView[]>(
+    "sidebar_ctas--sidebar_ctas_block",
+  );
+
   return {
     props: {
       ...(await getGlobalElements(context)),
       slideShowBlock,
+      sidebarCtasBlock,
       node,
     },
   };
