@@ -73,15 +73,6 @@ export default function ShowHorsesPage({
                 produce your World Champion!
               </p>
               <p>
-                We welcome resident trainers Henry and Nicole Gauthier (APHA
-                Professional Horseman) and Assistant Trainer Leah Currie. With
-                over 25 years of experience LaPlaine QH & Paints offers expert
-                training, sales, coaching and breeding from
-                beginner/recreational to World Show levels. Also your local
-                Excel Supplements dealer, contact Nicole for more information
-                306-467-7410
-              </p>
-              <p>
                 THOUGHT: Many have the desire to win.............few the will to
                 prepare.
               </p>
