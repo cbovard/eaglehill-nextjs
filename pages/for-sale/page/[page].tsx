@@ -61,10 +61,6 @@ export default function ForSalePagePage({
                 animals. We know they have great homes and you will enjoy them
                 as we did while they lived here!
               </p>
-              <p>
-                Canadian Distributor for Lifeline Equine products. Contact us
-                today{" "}
-              </p>
             </div>
           </div>
 

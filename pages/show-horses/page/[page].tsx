@@ -64,13 +64,11 @@ export default function ShowHorsesPage({
                 halter and are traveled before the judges so that lameness and
                 quality of movement can be evaluated. Horses are judged on
                 balance, structural correctness, breed and sex characteristics
-                and degree of muscling. Of these, balance is the most
-                important.Eagle Hill Equine and LaPlaine Quarter Horses and
-                Paints have combined their expertise! Now offer a limited number
-                of Halter fitting openings for the 2020 Show Season. Contact us
-                for pricing and availably. eaglehillequine@live.ca
-                403-556-1195-. Eagle Hill Equine has everything needed to
-                produce your World Champion!
+                and degree of muscling. Of these, balance is the most important.
+                Now offer a limited number of Halter fitting openings for the
+                2020 Show Season. Contact us for pricing and availably.
+                eaglehillequine@live.ca 403-556-1195-. Eagle Hill Equine has
+                everything needed to produce your World Champion!
               </p>
               <p>
                 THOUGHT: Many have the desire to win.............few the will to
