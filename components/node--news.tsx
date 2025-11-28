@@ -4,6 +4,7 @@ import Image from "next/image";
 import { NodeProps } from "components/node";
 import { MediaImages } from "components/media--images";
 import { FormattedText, TeaserText } from "./formatted-text";
+import { nodeServerAppPaths } from "next/dist/build/webpack/plugins/pages-manifest-plugin";
 
 export function NodeNews({ node, viewMode, ...props }: NodeProps) {
   if (viewMode === "teaser") {
@@ -48,7 +49,7 @@ export function NodeNewsTeaser({ node, ...props }) {
       {...props}
       className="m-auto max-w-xs rounded-lg bg-deep-fir-950 p-4 text-center drop-shadow-white-1 md:m-0 lg:max-w-[18rem]"
     >
-      {node.field_news_images[0].field_media_image?.uri && (
+      {node.field_news_images?.[0]?.field_media_image?.uri && (
         <div className="mb-6">
           <Link href={node.path.alias} passHref>
             <Image
@@ -76,10 +77,10 @@ export function NodeNewsTeaser({ node, ...props }) {
           {node.title}
         </Link>
       </h2>
-      {node.body.processed && (
+      {node.body?.processed && (
         <section>
           <p className="mb-6 text-base text-white">
-            {node.body?.processed && <TeaserText text={node.body.processed} />}
+            <TeaserText text={node.body.processed} />
           </p>
         </section>
       )}
